@@ -1,0 +1,7 @@
+[INFO][main.go:42]2020/06/14 17:25:37 hello,tiedan
+[INFO][user_test.go:23]2020/06/14 17:38:10 go test log worked!
+[INFO][user_test.go:23]2020/06/14 17:39:06 go test log worked!
+[INFO][user_test.go:23]2020/06/14 17:44:01 go test log worked!
+[INFO][user_test.go:23]2020/06/14 17:44:59 go test log worked!
+[INFO][main.go:41]2020/06/14 17:48:07 hello,tiedan
+[INFO][main.go:41]2020/06/14 17:48:24 hello,tiedan
