@@ -46,17 +46,17 @@ func TotalArticleByAuthor(userID int, args ...interface{}) (num int, err error) 
 }
 
 //TotalArticleByStatus 计算文章总数
-func TotalArticleByStatus(userID int, args ...interface{}) (num int, err error) {
+func TotalArticleByStatus(args ...interface{}) (num int, err error) {
 	var sqlStr string
 
 	if len(args) == 0 {
-		sqlStr = "SELECT COUNT(article_id) from article where (SELECT u.role from user u where u.user_id=?)='admin'"
-		err = db.Get(&num, sqlStr, userID)
+		sqlStr = "SELECT COUNT(article_id) from article"
+		err = db.Get(&num, sqlStr)
 		return
 	}
 	if n, ok := args[0].(int); ok && n >= 0 && n <= 2 {
-		sqlStr = "SELECT COUNT(article_id) from article where status=? AND (SELECT u.role from user u where u.user_id=?)='admin'"
-		err = db.Get(&num, sqlStr, n, userID)
+		sqlStr = "SELECT COUNT(article_id) from article where status=? "
+		err = db.Get(&num, sqlStr, n)
 		return
 	}
 	return 0, fmt.Errorf("参数不合法")
@@ -91,16 +91,16 @@ func GetPArticle(userID, articleID int) (article *model.ArticleDetail, err error
 }
 
 //GetRPArticle 读取文章详情
-func GetRPArticle(userID, articleID int) (article *model.ArticleDetail, err error) {
+func GetRPArticle(articleID int) (article *model.ArticleDetail, err error) {
 	article = &model.ArticleDetail{}
 	sqlStr := `
 	SELECT a.article_id,a.title,a.img,a.view_count,a.status,a.summary,a.create_time,a.update_time,a.author_id,u.user_name,u.avatar,a.category_id,c.category_name,c.category_no,a.content 
 	FROM article a 
 	LEFT JOIN article_category c ON a.category_id=c.category_id 
 	LEFT JOIN user u ON a.author_id=u.user_id 
-	WHERE a.article_id=? AND (SELECT u.role from user u where u.user_id=?)='admin'
+	WHERE a.article_id=? 
 	`
-	err = db.Get(article, sqlStr, articleID, userID)
+	err = db.Get(article, sqlStr, articleID)
 	return
 }
 
@@ -121,14 +121,13 @@ func GetArticlesByAuthor(authorID int, offset, limit int) (articles []*model.Art
 }
 
 //GetAllArtilesByStatus 根据status返回所有文章列表。
-func GetAllArtilesByStatus(userID int, offset, limit int, args ...interface{}) (articles []*model.Article, err error) {
+func GetAllArtilesByStatus(offset, limit int, args ...interface{}) (articles []*model.Article, err error) {
 	if len(args) == 0 {
 		sqlStr := `
 SELECT a.article_id,a.title,a.img,a.view_count,a.status,a.summary,a.create_time,a.update_time,a.author_id,u.user_name,u.avatar,a.category_id,c.category_name,c.category_no
 FROM article a 
 LEFT JOIN article_category c ON a.category_id=c.category_id
 LEFT JOIN user u ON a.author_id=u.user_id 
-WHERE  (SELECT u.role from user u where u.user_id=?)='admin'
 ORDER BY a.update_time desc,a.article_id desc
 LIMIT ? OFFSET ?
 `
@@ -145,12 +144,12 @@ LIMIT ? OFFSET ?
 		FROM article a 
 		LEFT JOIN article_category c ON a.category_id=c.category_id
 		LEFT JOIN user u ON a.author_id=u.user_id 
-		WHERE a.status=? AND (SELECT u.role from user u where u.user_id=?)='admin'
+		WHERE a.status=? 
 		ORDER BY a.update_time desc,a.article_id desc
 		LIMIT ? OFFSET ?
 		`
 
-		err = db.Select(&articles, sqlStr, n, userID, limit, offset)
+		err = db.Select(&articles, sqlStr, n, limit, offset)
 		if err != nil {
 			return nil, err
 		}
@@ -229,9 +228,9 @@ func EditArticle(userID int, article *model.ArticleDetail) (err error) {
 }
 
 //DelArticlesFE 删除文章
-func DelArticlesFE(userID int, ids []int) (err error) {
-	sqlStr := "delete from article a where a.article_id in (?) and (SELECT u.role from user u where u.user_id=?)='admin'"
-	query, args, err := sqlx.In(sqlStr, ids, userID)
+func DelArticlesFE(ids []int) (err error) {
+	sqlStr := "delete from article a where a.article_id in (?) "
+	query, args, err := sqlx.In(sqlStr, ids)
 	if err != nil {
 		return
 	}
@@ -293,10 +292,10 @@ func ExistArticleByID(id int) (bool, error) {
 }
 
 //ExistArticle 管理员查看是否存在
-func ExistArticle(userID, id int) (bool, error) {
-	sqlStr := "select a.article_id from article a where a.article_id=? and (SELECT u.role from user u where u.user_id=?)='admin' "
+func ExistArticle(id int) (bool, error) {
+	sqlStr := "select a.article_id from article a where a.article_id=? "
 	var rarticle model.Article
-	err := db.Get(&rarticle, sqlStr, id, userID)
+	err := db.Get(&rarticle, sqlStr, id)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return false, nil
@@ -307,9 +306,9 @@ func ExistArticle(userID, id int) (bool, error) {
 }
 
 //CheckArticles 文章审核
-func CheckArticles(userID int, ids []int, status int) (err error) {
-	sqlStr := "UPDATE article a SET a.status=? where a.article_id in (?) and (SELECT u.role from user u where u.user_id=?)='admin'"
-	query, args, err := sqlx.In(sqlStr, status, ids, userID)
+func CheckArticles(ids []int, status int) (err error) {
+	sqlStr := "UPDATE article a SET a.status=? where a.article_id in (?) "
+	query, args, err := sqlx.In(sqlStr, status, ids)
 	if err != nil {
 		return
 	}

@@ -39,9 +39,9 @@ func EditWork(userID int, work *model.WorkDetail) (err error) {
 	return db.EditWork(userID, work)
 }
 
-//DelWorksFE 永久删除作品--事务，多表
-func DelWorksFE(userID int, ids []int) (err error) {
-	return db.DelWorksFE(userID, ids)
+//RADelWorksFE 永久删除作品--事务，多表
+func RADelWorksFE(ids []int) (err error) {
+	return db.DelWorksFE(ids)
 }
 
 //DelWorks 删除作品--软删除 --事务，多表
@@ -61,9 +61,9 @@ func ExistWorkByID(workID int) (bool, error) {
 	return db.ExistWorkByID(workID)
 }
 
-//CheckWorks 作品审核
-func CheckWorks(userID int, ids []int, status int) (err error) {
-	return db.CheckWorks(userID, ids, status)
+//RACheckWorks 作品审核
+func RACheckWorks(ids []int, status int) (err error) {
+	return db.CheckWorks(ids, status)
 }
 
 //CountWork 访问数量
@@ -73,15 +73,15 @@ func CountWork(id int) (err error) {
 
 //新增服务
 
-//GetRPWork 获取文章详情
-func GetRPWork(userID, articleID int) (*model.ArticleDetail, error) {
-	return db.GetRPArticle(userID, articleID)
+//RAGetWork 获取文章详情
+func RAGetWork(workID int) (*model.WorkDetail, error) {
+	return db.GetRPWork(workID)
 }
 
-//GetAllWorksByStatus 通过状态获取所有文章列表
-func GetAllWorksByStatus(userID int, page int, args ...interface{}) ([]*model.Article, error) {
+//RAGetAllWorksByStatus 通过状态获取所有文章列表
+func RAGetAllWorksByStatus(page int, args ...interface{}) ([]*model.Work, error) {
 	offset := (page - 1) * setting.PageSize
-	return db.GetAllArtilesByStatus(userID, offset, setting.PageSize, args...)
+	return db.GetAllWorksByStatus(offset, setting.PageSize, args...)
 }
 
 //TotalWorkByAuthor 根据userID来计算文章
@@ -89,14 +89,14 @@ func TotalWorkByAuthor(userID int, args ...interface{}) {
 	db.TotalArticleByAuthor(userID, args...)
 }
 
-//TotalWorkByStatus 管理员计算
-func TotalWorkByStatus(userID int, args ...interface{}) {
-	db.TotalWorkByStatus(userID, args...)
+//RATotalWorkByStatus 管理员计算
+func RATotalWorkByStatus(args ...interface{}) {
+	db.TotalWorkByStatus(args...)
 }
 
-//ExistWork 判断文章id是否真实存在,无论状态
-func ExistWork(userID int, workID int) (bool, error) {
-	return db.ExistWork(userID, workID)
+//RAExistWork 判断文章id是否真实存在,无论状态
+func RAExistWork(workID int) (bool, error) {
+	return db.ExistWork(workID)
 }
 
 // //SetWorkCount (origin,)

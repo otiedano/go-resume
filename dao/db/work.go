@@ -47,17 +47,17 @@ func TotalWorkByAuthor(userID int, args ...interface{}) (num int, err error) {
 }
 
 //TotalWorkByStatus 计算文章总数
-func TotalWorkByStatus(userID int, args ...interface{}) (num int, err error) {
+func TotalWorkByStatus(args ...interface{}) (num int, err error) {
 	var sqlStr string
 
 	if len(args) == 0 {
-		sqlStr = "SELECT COUNT(work_id) from work where (SELECT u.role from user u where u.user_id=?)='admin'"
-		err = db.Get(&num, sqlStr, userID)
+		sqlStr = "SELECT COUNT(work_id) from work "
+		err = db.Get(&num, sqlStr)
 		return
 	}
 	if n, ok := args[0].(int); ok && n >= 0 && n <= 2 {
-		sqlStr = "SELECT COUNT(work_id) from work where status=? and (SELECT u.role from user u where u.user_id=?)='admin'"
-		err = db.Get(&num, sqlStr, n, userID)
+		sqlStr = "SELECT COUNT(work_id) from work where status=? "
+		err = db.Get(&num, sqlStr, n)
 		return
 	}
 	return 0, fmt.Errorf("参数不合法")
@@ -148,17 +148,17 @@ func GetPWork(userID, workID int) (w *model.WorkDetail, err error) {
 }
 
 //GetRPWork 读取所有状态的作品详情
-func GetRPWork(userID, workID int) (w *model.WorkDetail, err error) {
+func GetRPWork(workID int) (w *model.WorkDetail, err error) {
 	w = &model.WorkDetail{}
 	sqlStr := `
 	SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 	       ,w.content,w.img,w.if_horizons
 	FROM work w
 	LEFT JOIN user u ON w.user_id=u.user_id
-	WHERE (SELECT u.role from user u where u.user_id=?)='admin' AND work_id=?
+	WHERE work_id=?
   `
 
-	err = db.Get(w, sqlStr, userID, workID)
+	err = db.Get(w, sqlStr, workID)
 	if err != nil {
 		return nil, err
 	}
@@ -304,7 +304,7 @@ func GetWorksByTag(tagID int, offset, limit int) (works []*model.Work, err error
 }
 
 //GetAllWorksByStatus 根据状态显示所有作品
-func GetAllWorksByStatus(userID int, offset, limit int, args ...interface{}) (works []*model.Work, err error) {
+func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model.Work, err error) {
 
 	if len(args) == 0 {
 		fmt.Print("begin getworksbytag")
@@ -312,12 +312,11 @@ func GetAllWorksByStatus(userID int, offset, limit int, args ...interface{}) (wo
 		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
-		WHERE (SELECT u.role from user u where u.user_id=?)='admin'
 		ORDER BY work_no desc
 		LIMIT ? OFFSET ?
 		`
 
-		r, err := db.Queryx(sqlStr, userID, limit, offset)
+		r, err := db.Queryx(sqlStr, limit, offset)
 		if err != nil {
 			return nil, err
 		}
@@ -348,11 +347,11 @@ func GetAllWorksByStatus(userID int, offset, limit int, args ...interface{}) (wo
 		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
-		WHERE (SELECT u.role from user u where u.user_id=?)='admin' AND w.status=?
+		WHERE w.status=?
 		ORDER BY work_no desc
 		LIMIT ? OFFSET ?
 		`
-		r, err := db.Queryx(sqlStr, userID, n, limit, offset)
+		r, err := db.Queryx(sqlStr, n, limit, offset)
 		if err != nil {
 			return nil, err
 		}
@@ -622,11 +621,9 @@ func EditWork(userID int, work *model.WorkDetail) (err error) {
 }
 
 //DelWorksFE 永久删除作品--事务，多表
-func DelWorksFE(userID int, ids []int) (err error) {
+func DelWorksFE(ids []int) (err error) {
 
-	sqlStr := `
-	  DELETE FROM work WHERE work_id IN (?) and (SELECT u.role from user u where u.user_id=?)='admin'
-	`
+	sqlStr := "DELETE FROM work WHERE work_id IN (?)"
 	query, args, err := sqlx.In(sqlStr, ids)
 	_, err = db.Exec(query, args...)
 	if err != nil {
@@ -676,10 +673,10 @@ func ExistWorkByID(workID int) (bool, error) {
 }
 
 //ExistWork 管理员查看是否存在
-func ExistWork(userID, id int) (bool, error) {
-	sqlStr := "select w.work_id from work w where w.work_id=? and (SELECT u.role from user u where u.user_id=?)='admin' "
+func ExistWork(workID int) (bool, error) {
+	sqlStr := "select w.work_id from work w where w.work_id=?"
 	var rwork model.Work
-	err := db.Get(&rwork, sqlStr, id, userID)
+	err := db.Get(&rwork, sqlStr, workID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return false, nil
@@ -690,9 +687,9 @@ func ExistWork(userID, id int) (bool, error) {
 }
 
 //CheckWorks 作品审核
-func CheckWorks(userID int, ids []int, status int) (err error) {
-	sqlStr := "UPDATE work w SET w.status=? where w.work_id in (?) and (SELECT u.role from user u where u.user_id=?)='admin'"
-	query, args, err := sqlx.In(sqlStr, status, ids, userID)
+func CheckWorks(ids []int, status int) (err error) {
+	sqlStr := "UPDATE work w SET w.status=? where w.work_id in (?) "
+	query, args, err := sqlx.In(sqlStr, status, ids)
 	if err != nil {
 		return
 	}

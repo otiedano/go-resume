@@ -40,9 +40,9 @@ func EditArticle(userID int, article *model.ArticleDetail) (err error) {
 	return EditArticle(userID, article)
 }
 
-//DelArticlesFE 删除文章
-func DelArticlesFE(userID int, ids []int) (err error) {
-	return db.DelArticlesFE(userID, ids)
+//RADelArticlesFE 删除文章
+func RADelArticlesFE(ids []int) (err error) {
+	return db.DelArticlesFE(ids)
 }
 
 //DelArticles 删除文章
@@ -62,9 +62,9 @@ func ExistArticleByID(id int) (bool, error) {
 	return db.ExistArticleByID(id)
 }
 
-//CheckArticles 文章审核
-func CheckArticles(userID int, ids []int, status int) (err error) {
-	return db.CheckArticles(userID, ids, status)
+//RACheckArticles 文章审核
+func RACheckArticles(ids []int, status int) (err error) {
+	return db.CheckArticles(ids, status)
 }
 
 //CountArticle 访问数量
@@ -74,15 +74,15 @@ func CountArticle(id int) (err error) {
 
 //新增服务
 
-//GetRPArticle 获取文章详情
-func GetRPArticle(userID, articleID int) (*model.ArticleDetail, error) {
-	return db.GetRPArticle(userID, articleID)
+//RAGetRPArticle 获取文章详情
+func RAGetRPArticle(articleID int) (*model.ArticleDetail, error) {
+	return db.GetRPArticle(articleID)
 }
 
-//GetAllArtilesByStatus 通过状态获取所有文章列表
-func GetAllArtilesByStatus(userID int, page int, args ...interface{}) ([]*model.Article, error) {
+//RAGetAllArtilesByStatus 通过状态获取所有文章列表
+func RAGetAllArtilesByStatus(page int, args ...interface{}) ([]*model.Article, error) {
 	offset := (page - 1) * setting.PageSize
-	return db.GetAllArtilesByStatus(userID, offset, setting.PageSize, args...)
+	return db.GetAllArtilesByStatus(offset, setting.PageSize, args...)
 }
 
 //TotalArticleByAuthor 根据userID来计算文章
@@ -90,14 +90,14 @@ func TotalArticleByAuthor(userID int, args ...interface{}) {
 	db.TotalArticleByAuthor(userID, args...)
 }
 
-//TotalArticleBy 管理员计算
-func TotalArticleBy(userID int, args ...interface{}) {
-	db.TotalArticleByStatus(userID, args...)
+//RATotalArticle 管理员计算
+func RATotalArticle(args ...interface{}) {
+	db.TotalArticleByStatus(args...)
 }
 
-//ExistArticle 判断文章id是否真实存在,无论状态
-func ExistArticle(userID int, articleID int) (bool, error) {
-	return db.ExistArticle(userID, articleID)
+//RAExistArticle 判断文章id是否真实存在,无论状态
+func RAExistArticle(int, articleID int) (bool, error) {
+	return db.ExistArticle(articleID)
 }
 
 // //SetArticleCount 记录访问数量，同一ip只能访问一次

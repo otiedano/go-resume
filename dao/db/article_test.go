@@ -49,22 +49,22 @@ func TestTotalArticleByAuthor(t *testing.T) {
 	fmt.Printf("count:%v\n", n)
 }
 func TestTotalArticleByStatus(t *testing.T) {
-	n, err := TotalArticleByStatus(1)
+	n, err := TotalArticleByStatus()
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Printf("count:%v\n", n)
-	n, err = TotalArticleByStatus(1, 0)
+	n, err = TotalArticleByStatus(0)
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Printf("count0:%v\n", n)
-	n, err = TotalArticleByStatus(1, 1)
+	n, err = TotalArticleByStatus(1)
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Printf("count1:%v\n", n)
-	n, err = TotalArticleByStatus(1, 2)
+	n, err = TotalArticleByStatus(2)
 	if err != nil {
 		t.Error(err)
 	}
@@ -106,7 +106,7 @@ func TestAddArticle(t *testing.T) {
 
 func TestCheckArticle(t *testing.T) {
 	ids := []int{5}
-	err := CheckArticles(1, ids, 1)
+	err := CheckArticles(ids, 1)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -136,7 +136,7 @@ func TestGetArticlesByCategory(t *testing.T) {
 	}
 }
 func TestGetAllArtilesByStatus(t *testing.T) {
-	a, err := GetAllArtilesByStatus(1, 0, 10, 2)
+	a, err := GetAllArtilesByStatus(0, 10, 2)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -164,7 +164,7 @@ func TestGetPArticle(t *testing.T) {
 
 }
 func TestGetRPArticle(t *testing.T) {
-	a, err := GetRPArticle(1, 31)
+	a, err := GetRPArticle(31)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -208,7 +208,7 @@ func TestExistArticleByAuth(t *testing.T) {
 }
 func TestExistArticleByAdmin(t *testing.T) {
 
-	b, err := ExistArticle(1, 10)
+	b, err := ExistArticle(10)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -231,7 +231,7 @@ func TestVisitArticle(t *testing.T) {
 
 func TestDelArticleFE(t *testing.T) {
 	ids := []int{3, 4, 5}
-	err := DelArticlesFE(1, ids)
+	err := DelArticlesFE(ids)
 	if err != nil {
 		t.Error("err:", err)
 	}

@@ -49,22 +49,22 @@ func TestTotalWorkByAuth(t *testing.T) {
 	fmt.Printf("count:%v\n", n)
 }
 func TestTotalWorkByStatus(t *testing.T) {
-	n, err := TotalWorkByStatus(1)
+	n, err := TotalWorkByStatus()
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Printf("count:%v\n", n)
-	n, err = TotalWorkByStatus(1, 0)
+	n, err = TotalWorkByStatus(0)
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Printf("count0:%v\n", n)
-	n, err = TotalWorkByStatus(1, 1)
+	n, err = TotalWorkByStatus(1)
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Printf("count1:%v\n", n)
-	n, err = TotalWorkByStatus(1, 2)
+	n, err = TotalWorkByStatus(2)
 	if err != nil {
 		t.Error(err)
 	}
@@ -176,7 +176,7 @@ func TestGetPWork(t *testing.T) {
 	// fmt.Printf("w:%+v", w)
 }
 func TestGetRPWork(t *testing.T) {
-	w, err := GetRPWork(1, 3)
+	w, err := GetRPWork(3)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -213,7 +213,7 @@ func TestGetWorksByAuth(t *testing.T) {
 	// fmt.Printf("w:%+v", w)
 }
 func TestGetAllWorksByStatus(t *testing.T) {
-	a, err := GetAllWorksByStatus(1, 0, 10, 2)
+	a, err := GetAllWorksByStatus(0, 10, 2)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -238,7 +238,7 @@ func TestEditWork(t *testing.T) {
 //DelWorksFE
 func TestDelWorksFE(t *testing.T) {
 	ids := []int{4, 5, 6}
-	err := DelWorksFE(1, ids)
+	err := DelWorksFE(ids)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -269,7 +269,7 @@ func TestExistWorkByAuth(t *testing.T) {
 //ExistWorkByID
 func TestExistWorkByID(t *testing.T) {
 	ids := []int{9}
-	_ = CheckWorks(1, ids, 1)
+	_ = CheckWorks(ids, 1)
 	b, err := ExistWorkByID(9)
 	if err != nil {
 		t.Error("err:", err)
@@ -284,7 +284,7 @@ func TestExistWorkByID(t *testing.T) {
 //ExistWorkByID
 func TestExistWorkByAdmin(t *testing.T) {
 
-	b, err := ExistWork(1, 9)
+	b, err := ExistWork(9)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -296,7 +296,7 @@ func TestExistWorkByAdmin(t *testing.T) {
 }
 func TestCheckWorks(t *testing.T) {
 	ids := []int{1, 2, 3}
-	err := CheckWorks(1, ids, 1)
+	err := CheckWorks(ids, 1)
 	if err != nil {
 		t.Error(err)
 	}
