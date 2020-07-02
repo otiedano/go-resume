@@ -34,31 +34,97 @@ func loadBack(g *gin.RouterGroup) {
 
 	//技能
 	//-获取全部技能
+	g.GET("/skills", api.GetSkills)
 	//-添加技能
+	g.POST("/skills", api.AddSkill)
 	//-编辑技能
+	g.PUT("/skills/id/:id", api.EditSkill)
 	//-批量编辑技能
+	g.PUT("/skills", api.EditSkill)
 	//-删除技能
+	g.DELETE("/skills", api.DelSkills)
 
 	//软件
 	//-获取全部软件
+	g.GET("/softwares", api.GetSkills)
 	//-添加软件
+	g.POST("/softwares", api.AddSoftware)
 	//-编辑软件
+	g.PUT("/softwares/id/:id", api.EditSoftware)
 	//-批量编辑软件
+	g.PUT("/softwares", api.EditSoftware)
 	//-删除软件
+	g.DELETE("/softwares", api.DelSoftwares)
 
 	//文章  ？加入审核，根据状态获取全部文章，管理员读取文章详情
+	//-根据用户获取文章列表
+	g.GET("/articles", api.GetSkills)
+	//-获取文章详情
+	g.GET("/articles/id/:id", api.GetSkills)
+	//-添加文章
+	g.POST("/articles", api.GetSkills)
+	//-编辑文章
+	g.PUT("/articles/id/:id", api.GetSkills)
+	//-删除文章
+	g.DELETE("/articles", api.GetSkills)
 	//-
+	//-管理员审核文章
+	g.POST("/articles/a/check", api.GetSkills)
+	//-管理员根据状态读取文章列表
+	g.GET("/articles/a", api.GetSkills)
+	//-管理员读取文章详情
+	g.GET("/articles/a/id/:id", api.GetSkills)
+	//-管理员删除文章
+	g.DELETE("/articles/a", api.GetSkills)
+
 	//文章分类
 	//-获取全部分类
+	g.GET("/articles/category", api.GetSkills)
 	//-添加分类
+	g.POST("/articles/category", api.GetSkills)
 	//-编辑分类
+	g.PUT("/articles/category/id/:id", api.GetSkills)
 	//-批量编辑分类
+	g.PUT("/articles/category", api.GetSkills)
 	//-删除分类
+	g.DELETE("/articles/category", api.GetSkills)
 
 	//作品   ？加入审核，根据状态获取全部作品，管理员读取作品详情
+	//-根据用户获取作品列表
+	g.GET("/works", api.GetSkills)
+	//-获取作品详情
+	g.GET("/works/id/:id", api.GetSkills)
+	//-添加作品
+	g.POST("/works", api.GetSkills)
+	//-编辑编辑
+	g.PUT("/works/id/:id", api.GetSkills)
+	//-删除作品
+	g.DELETE("/works", api.GetSkills)
+	//-
+	//-管理员审核作品
+	g.POST("/works/a/check", api.GetSkills)
+	//-管理员根据状态读取作品列表
+	g.GET("/works/a", api.GetSkills)
+	//-管理员读取作品详情
+	g.GET("/works/a/id/:id", api.GetSkills)
+	//-管理员删除作品
+	g.DELETE("/works/a", api.GetSkills)
+
 	//作品标签
+	//-获取全部标签
+	g.GET("/works/tags", api.GetSkills)
+	//-添加标签
+	g.POST("/works/tags", api.GetSkills)
+	//-编辑标签
+	g.PUT("/works/tags/id/:id", api.GetSkills)
+	//-批量编辑标签
+	g.PUT("/works/tags", api.GetSkills)
+	//-删除标签
+	g.DELETE("/works/tags", api.GetSkills)
 
 	//权限管理
+	//-给予权限
+	//-删除权限
 	g.POST("/upload", api.UploadImage)
 
 }

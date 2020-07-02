@@ -85,13 +85,18 @@ func RAGetAllWorksByStatus(page int, args ...interface{}) ([]*model.Work, error)
 }
 
 //TotalWorkByAuthor 根据userID来计算文章
-func TotalWorkByAuthor(userID int, args ...interface{}) {
-	db.TotalArticleByAuthor(userID, args...)
+func TotalWorkByAuthor(userID int, args ...interface{}) (int, error) {
+	return db.TotalArticleByAuthor(userID, args...)
+}
+
+//TotalWork 计算作品记录，审核通过，或者未删除的数量。
+func TotalWork(args ...interface{}) (int, error) {
+	return db.TotalWork(args...)
 }
 
 //RATotalWorkByStatus 管理员计算
-func RATotalWorkByStatus(args ...interface{}) {
-	db.TotalWorkByStatus(args...)
+func RATotalWorkByStatus(args ...interface{}) (int, error) {
+	return db.TotalWorkByStatus(args...)
 }
 
 //RAExistWork 判断文章id是否真实存在,无论状态

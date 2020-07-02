@@ -86,13 +86,18 @@ func RAGetAllArtilesByStatus(page int, args ...interface{}) ([]*model.Article, e
 }
 
 //TotalArticleByAuthor 根据userID来计算文章
-func TotalArticleByAuthor(userID int, args ...interface{}) {
-	db.TotalArticleByAuthor(userID, args...)
+func TotalArticleByAuthor(userID int, args ...interface{}) (int, error) {
+	return db.TotalArticleByAuthor(userID, args...)
+}
+
+//TotalArticle 获取审核通过，或者未删除的内容
+func TotalArticle(args ...interface{}) (int, error) {
+	return db.TotalArticle(args...)
 }
 
 //RATotalArticle 管理员计算
-func RATotalArticle(args ...interface{}) {
-	db.TotalArticleByStatus(args...)
+func RATotalArticle(args ...interface{}) (int, error) {
+	return db.TotalArticleByStatus(args...)
 }
 
 //RAExistArticle 判断文章id是否真实存在,无论状态
