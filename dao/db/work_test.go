@@ -13,17 +13,7 @@ func TestTotalWork(t *testing.T) {
 		t.Error(err)
 	}
 	fmt.Printf("count:%v\n", n)
-	n, err = TotalWork(0)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 
-	n, err = TotalWork(1)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 }
 func TestTotalWorkByAuth(t *testing.T) {
 	n, err := TotalWorkByAuthor(1)
@@ -31,22 +21,7 @@ func TestTotalWorkByAuth(t *testing.T) {
 		t.Error(err)
 	}
 	fmt.Printf("count:%v\n", n)
-	n, err = TotalWorkByAuthor(1, 0)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 
-	n, err = TotalWorkByAuthor(1, 1)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
-	n, err = TotalWorkByAuthor(1, 2)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 }
 func TestTotalWorkByStatus(t *testing.T) {
 	n, err := TotalWorkByStatus()
@@ -106,7 +81,7 @@ func TestAddWork(t *testing.T) {
 		},
 	}
 
-	err := AddWork(1, w)
+	_, err := AddWork(1, w)
 	if err != nil {
 		t.Error("err:", err)
 	}

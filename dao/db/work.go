@@ -12,38 +12,21 @@ import (
 )
 
 //TotalWork 计算作品总数
-func TotalWork(args ...interface{}) (num int, err error) {
-	var sqlStr string
+func TotalWork() (num int, err error) {
 
-	if len(args) == 0 {
-		sqlStr = "SELECT COUNT(work_id) from work where status=1"
-	} else {
-		if args[0] == 0 {
-			sqlStr = "SELECT COUNT(work_id) from work where status=1"
-		} else {
-			sqlStr = "SELECT COUNT(work_id) from work where status!=2"
-		}
+	sqlStr := "SELECT COUNT(work_id) from work where status=1"
 
-	}
 	err = db.Get(&num, sqlStr)
 	return
 }
 
 //TotalWorkByAuthor 计算作品总数
-func TotalWorkByAuthor(userID int, args ...interface{}) (num int, err error) {
-	var sqlStr string
+func TotalWorkByAuthor(userID int) (num int, err error) {
 
-	if len(args) == 0 {
-		sqlStr = "SELECT COUNT(work_id) from work where user_id=?"
-		err = db.Get(&num, sqlStr, userID)
-		return
-	}
-	if n, ok := args[0].(int); ok && n >= 0 && n <= 2 {
-		sqlStr = "SELECT COUNT(work_id) from work where status=? and user_id=?"
-		err = db.Get(&num, sqlStr, n, userID)
-		return
-	}
-	return 0, fmt.Errorf("参数不合法")
+	sqlStr := "SELECT COUNT(work_id) from work where user_id=? and status!=2"
+	err = db.Get(&num, sqlStr, userID)
+	return
+
 }
 
 //TotalWorkByStatus 计算文章总数
@@ -60,7 +43,9 @@ func TotalWorkByStatus(args ...interface{}) (num int, err error) {
 		err = db.Get(&num, sqlStr, n)
 		return
 	}
-	return 0, fmt.Errorf("参数不合法")
+	sqlStr = "SELECT COUNT(work_id) from work "
+	err = db.Get(&num, sqlStr)
+	return
 }
 
 //GetWork 读取审核过的作品详情
@@ -196,7 +181,7 @@ func GetWorksByAuthor(userID int, offset, limit int) (works []*model.Work, err e
 		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
-		WHERE w.user_id=?
+		WHERE w.user_id=? AND status!=2
 		ORDER BY work_no desc
 		LIMIT ? OFFSET ?
 		`
@@ -374,11 +359,44 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 			works = append(works, w)
 		}
 	}
-	return works, nil
+
+	sqlStr := `
+		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		FROM work w
+		LEFT JOIN user u ON w.user_id=u.user_id
+		ORDER BY work_no desc
+		LIMIT ? OFFSET ?
+		`
+
+	r, err := db.Queryx(sqlStr, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	for r.Next() {
+		w := &model.Work{}
+		err = r.StructScan(w)
+		if err != nil {
+			zlog.Error("err:", err)
+			return nil, err
+		}
+		sqlStr1 := `
+			SELECT r.rl_id,r.tag_id,t.tag_name,r.work_id,r.create_time,r.update_time
+			FROM work_tag_rl r
+			LEFT JOIN work_tag t ON r.tag_id=t.tag_id
+			WHERE work_id=?
+			`
+		err = db.Select(&(w.Tags), sqlStr1, w.WorkID)
+		if err != nil {
+			zlog.Error("err:", err)
+			return nil, err
+		}
+		works = append(works, w)
+	}
+	return
 }
 
 //AddWork 新增作品--事务，多表
-func AddWork(userID int, work *model.WorkDetail) (err error) {
+func AddWork(userID int, work *model.WorkDetail) (workID int, err error) {
 	tx, err := db.Beginx() // 开启事务
 	if err != nil {
 		return
@@ -414,7 +432,7 @@ func AddWork(userID int, work *model.WorkDetail) (err error) {
 		return
 	}
 
-	workID := utils.Int64to32(id64)
+	workID = utils.Int64to32(id64)
 	workImgs := work.WorkImgs
 	//work_album表新增
 	if l := len(workImgs); l > 0 {
@@ -426,7 +444,7 @@ func AddWork(userID int, work *model.WorkDetail) (err error) {
 			_, err = tx.Exec(sqlStri, v.WorkID, v.ImgPath, v.ImgNo)
 			if err != nil {
 				zlog.Error(err)
-				return err
+				return 0, err
 			}
 		}
 
@@ -441,7 +459,7 @@ func AddWork(userID int, work *model.WorkDetail) (err error) {
 			_, err = tx.Exec(sqlStrt, v.TagID, v.WorkID)
 			if err != nil {
 				zlog.Error(err)
-				return err
+				return 0, err
 			}
 		}
 	}
@@ -645,7 +663,7 @@ func DelWorks(userID int, ids []int) (err error) {
 
 //ExistWorkByAuth 检查是否有操作作品的权限
 func ExistWorkByAuth(userID, workID int) (bool, error) {
-	sqlStr := "select work_id from work where work_id=? and user_id=? "
+	sqlStr := "select work_id from work where work_id=? and user_id=? and status!=2"
 	var rwork model.Work
 	err := db.Get(&rwork, sqlStr, workID, userID)
 	if err != nil {

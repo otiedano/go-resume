@@ -37,7 +37,7 @@ func AddArticle(userID int, article *model.ArticleDetail) (int, error) {
 
 //EditArticle 修改文章
 func EditArticle(userID int, article *model.ArticleDetail) (err error) {
-	return EditArticle(userID, article)
+	return db.EditArticle(userID, article)
 }
 
 //RADelArticlesFE 删除文章
@@ -51,9 +51,9 @@ func DelArticles(userID int, ids []int) (err error) {
 }
 
 //ExistArticleByAuth 检查是否有操作文章的权限
-func ExistArticleByAuth(userID int, article *model.Article) (bool, error) {
-	article.UserID = userID
-	return db.ExistArticleByAuth(userID, article.ArticleID)
+func ExistArticleByAuth(userID int, articleID int) (bool, error) {
+
+	return db.ExistArticleByAuth(userID, articleID)
 }
 
 //ExistArticleByID 前端判断文章是否存在
@@ -74,8 +74,8 @@ func CountArticle(id int) (err error) {
 
 //新增服务
 
-//RAGetRPArticle 获取文章详情
-func RAGetRPArticle(articleID int) (*model.ArticleDetail, error) {
+//RAGetArticle 获取文章详情
+func RAGetArticle(articleID int) (*model.ArticleDetail, error) {
 	return db.GetRPArticle(articleID)
 }
 
@@ -86,13 +86,13 @@ func RAGetAllArtilesByStatus(page int, args ...interface{}) ([]*model.Article, e
 }
 
 //TotalArticleByAuthor 根据userID来计算文章
-func TotalArticleByAuthor(userID int, args ...interface{}) (int, error) {
-	return db.TotalArticleByAuthor(userID, args...)
+func TotalArticleByAuthor(userID int) (int, error) {
+	return db.TotalArticleByAuthor(userID)
 }
 
-//TotalArticle 获取审核通过，或者未删除的内容
-func TotalArticle(args ...interface{}) (int, error) {
-	return db.TotalArticle(args...)
+//TotalArticle 获取审核通过的内容
+func TotalArticle() (int, error) {
+	return db.TotalArticle()
 }
 
 //RATotalArticle 管理员计算
@@ -101,7 +101,7 @@ func RATotalArticle(args ...interface{}) (int, error) {
 }
 
 //RAExistArticle 判断文章id是否真实存在,无论状态
-func RAExistArticle(int, articleID int) (bool, error) {
+func RAExistArticle(articleID int) (bool, error) {
 	return db.ExistArticle(articleID)
 }
 

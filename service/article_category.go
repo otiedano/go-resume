@@ -26,6 +26,19 @@ func EditArticleCategories(categories *model.ArticleCategories) (err error) {
 }
 
 //DelArticleCategories 删除文章分类
-func DelArticleCategories(ids []int) (err error) {
+func DelArticleCategories(articleCategories *model.ArticleCategories) (err error) {
+
+	var ids []int
+	for _, v := range *articleCategories {
+		if v.CategoryID != 0 {
+			ids = append(ids, v.CategoryID)
+		}
+	}
+
 	return db.DelArticleCategories(ids)
+}
+
+//ExistArticleCategory 判断分类是否存在
+func ExistArticleCategory(id int) (bool, error) {
+	return db.ExistArticleCategory(id)
 }

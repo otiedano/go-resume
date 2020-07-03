@@ -3,6 +3,7 @@ package routers
 import (
 	"sz_resume_202005/routers/api"
 	"sz_resume_202005/routers/api/apipublic"
+	v1 "sz_resume_202005/routers/api/v1"
 	"sz_resume_202005/utils/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -58,69 +59,69 @@ func loadBack(g *gin.RouterGroup) {
 
 	//文章  ？加入审核，根据状态获取全部文章，管理员读取文章详情
 	//-根据用户获取文章列表
-	g.GET("/articles", api.GetSkills)
+	g.GET("/articles", v1.GetArticle)
 	//-获取文章详情
-	g.GET("/articles/id/:id", api.GetSkills)
+	g.GET("/articles/id/:id", v1.GetArticleDetail)
 	//-添加文章
-	g.POST("/articles", api.GetSkills)
+	g.POST("/articles", v1.AddArticle)
 	//-编辑文章
-	g.PUT("/articles/id/:id", api.GetSkills)
+	g.PUT("/articles/id/:id", v1.EditArticle)
 	//-删除文章
-	g.DELETE("/articles", api.GetSkills)
+	g.DELETE("/articles", v1.DelArticle)
 	//-
 	//-管理员审核文章
-	g.POST("/articles/a/check", api.GetSkills)
+	g.POST("/articles/a/check", v1.RACheckArticle)
 	//-管理员根据状态读取文章列表
-	g.GET("/articles/a", api.GetSkills)
+	g.GET("/articles/a", v1.RAGetArticle)
 	//-管理员读取文章详情
-	g.GET("/articles/a/id/:id", api.GetSkills)
+	g.GET("/articles/a/id/:id", v1.RAGetArticleDetail)
 	//-管理员删除文章
-	g.DELETE("/articles/a", api.GetSkills)
+	g.DELETE("/articles/a", v1.RADelArticle)
 
 	//文章分类
 	//-获取全部分类
-	g.GET("/articles/category", api.GetSkills)
+	g.GET("/articles/categories", v1.GetArticleCategory)
 	//-添加分类
-	g.POST("/articles/category", api.GetSkills)
+	g.POST("/articles/categories", v1.AddArticleCategory)
 	//-编辑分类
-	g.PUT("/articles/category/id/:id", api.GetSkills)
+	g.PUT("/articles/categories/id/:id", v1.EditArticleCategory)
 	//-批量编辑分类
-	g.PUT("/articles/category", api.GetSkills)
+	g.PUT("/articles/categories", v1.BatchEditArticleCategory)
 	//-删除分类
-	g.DELETE("/articles/category", api.GetSkills)
+	g.DELETE("/articles/categories", v1.DelArticleCategory)
 
 	//作品   ？加入审核，根据状态获取全部作品，管理员读取作品详情
 	//-根据用户获取作品列表
-	g.GET("/works", api.GetSkills)
+	g.GET("/works", v1.GetWork)
 	//-获取作品详情
-	g.GET("/works/id/:id", api.GetSkills)
+	g.GET("/works/id/:id", v1.GetWorkDetail)
 	//-添加作品
-	g.POST("/works", api.GetSkills)
+	g.POST("/works", v1.AddWork)
 	//-编辑编辑
-	g.PUT("/works/id/:id", api.GetSkills)
+	g.PUT("/works/id/:id", v1.EditWork)
 	//-删除作品
-	g.DELETE("/works", api.GetSkills)
+	g.DELETE("/works", v1.DelWork)
 	//-
 	//-管理员审核作品
-	g.POST("/works/a/check", api.GetSkills)
+	g.POST("/works/a/check", v1.RACheckWork)
 	//-管理员根据状态读取作品列表
-	g.GET("/works/a", api.GetSkills)
+	g.GET("/works/a", v1.RAGetWork)
 	//-管理员读取作品详情
-	g.GET("/works/a/id/:id", api.GetSkills)
+	g.GET("/works/a/id/:id", v1.RAGetWorkDetail)
 	//-管理员删除作品
-	g.DELETE("/works/a", api.GetSkills)
+	g.DELETE("/works/a", v1.RADelWork)
 
 	//作品标签
 	//-获取全部标签
-	g.GET("/works/tags", api.GetSkills)
+	g.GET("/works/tags", v1.GetWorkTag)
 	//-添加标签
-	g.POST("/works/tags", api.GetSkills)
+	g.POST("/works/tags", v1.AddWorkTag)
 	//-编辑标签
-	g.PUT("/works/tags/id/:id", api.GetSkills)
+	g.PUT("/works/tags/id/:id", v1.EditWorkTag)
 	//-批量编辑标签
-	g.PUT("/works/tags", api.GetSkills)
+	g.PUT("/works/tags", v1.BatchEditWorkTag)
 	//-删除标签
-	g.DELETE("/works/tags", api.GetSkills)
+	g.DELETE("/works/tags", v1.DelWorkTag)
 
 	//权限管理
 	//-给予权限

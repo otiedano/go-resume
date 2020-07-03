@@ -11,38 +11,22 @@ import (
 )
 
 //TotalArticle 计算文章总数
-func TotalArticle(args ...interface{}) (num int, err error) {
+func TotalArticle() (num int, err error) {
 	var sqlStr string
 
-	if len(args) == 0 {
-		sqlStr = "SELECT COUNT(article_id) from article where status=1"
-	} else {
-		if args[0] == 0 {
-			sqlStr = "SELECT COUNT(article_id) from article where status=1"
-		} else {
-			sqlStr = "SELECT COUNT(article_id) from article where status!=2"
-		}
+	sqlStr = "SELECT COUNT(article_id) from article where status=1"
 
-	}
 	err = db.Get(&num, sqlStr)
 	return
 }
 
 //TotalArticleByAuthor 计算文章总数
-func TotalArticleByAuthor(userID int, args ...interface{}) (num int, err error) {
-	var sqlStr string
+func TotalArticleByAuthor(userID int) (num int, err error) {
 
-	if len(args) == 0 {
-		sqlStr = "SELECT COUNT(article_id) from article where author_id=?"
-		err = db.Get(&num, sqlStr, userID)
-		return
-	}
-	if n, ok := args[0].(int); ok && n >= 0 && n <= 2 {
-		sqlStr = "SELECT COUNT(article_id) from article where status=? and author_id=?"
-		err = db.Get(&num, sqlStr, n, userID)
-		return
-	}
-	return 0, fmt.Errorf("参数不合法")
+	sqlStr := "SELECT COUNT(article_id) from article where author_id=? and status!=2"
+	err = db.Get(&num, sqlStr, userID)
+	return
+
 }
 
 //TotalArticleByStatus 计算文章总数
@@ -59,7 +43,10 @@ func TotalArticleByStatus(args ...interface{}) (num int, err error) {
 		err = db.Get(&num, sqlStr, n)
 		return
 	}
-	return 0, fmt.Errorf("参数不合法")
+
+	sqlStr = "SELECT COUNT(article_id) from article"
+	err = db.Get(&num, sqlStr)
+	return
 }
 
 //GetArticle 读取审核过的文章详情
@@ -155,7 +142,20 @@ LIMIT ? OFFSET ?
 		}
 		return
 	}
-	return nil, fmt.Errorf("参数不合法")
+	sqlStr := `
+SELECT a.article_id,a.title,a.img,a.view_count,a.status,a.summary,a.create_time,a.update_time,a.author_id,u.user_name,u.avatar,a.category_id,c.category_name,c.category_no
+FROM article a 
+LEFT JOIN article_category c ON a.category_id=c.category_id
+LEFT JOIN user u ON a.author_id=u.user_id 
+ORDER BY a.update_time desc,a.article_id desc
+LIMIT ? OFFSET ?
+`
+
+	err = db.Select(&articles, sqlStr, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	return
 }
 
 //GetArticlesByCategory 根据分页和分类返回文章列表，用于前端显示
@@ -265,7 +265,7 @@ func DelArticles(userID int, ids []int) (err error) {
 
 //ExistArticleByAuth 检查是否有操作文章的权限
 func ExistArticleByAuth(userID, id int) (bool, error) {
-	sqlStr := "select article_id from article where article_id=? and author_id=? "
+	sqlStr := "select article_id from article where article_id=? and author_id=? and status!=2"
 	var rarticle model.Article
 	err := db.Get(&rarticle, sqlStr, id, userID)
 	if err != nil {

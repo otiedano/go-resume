@@ -13,17 +13,7 @@ func TestTotalArticle(t *testing.T) {
 		t.Error(err)
 	}
 	fmt.Printf("count:%v\n", n)
-	n, err = TotalArticle(0)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 
-	n, err = TotalArticle(1)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 }
 func TestTotalArticleByAuthor(t *testing.T) {
 	n, err := TotalArticleByAuthor(1)
@@ -31,22 +21,7 @@ func TestTotalArticleByAuthor(t *testing.T) {
 		t.Error(err)
 	}
 	fmt.Printf("count:%v\n", n)
-	n, err = TotalArticleByAuthor(1, 0)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 
-	n, err = TotalArticleByAuthor(1, 1)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
-	n, err = TotalArticleByAuthor(1, 2)
-	if err != nil {
-		t.Error(err)
-	}
-	fmt.Printf("count:%v\n", n)
 }
 func TestTotalArticleByStatus(t *testing.T) {
 	n, err := TotalArticleByStatus()

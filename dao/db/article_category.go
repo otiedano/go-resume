@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 	"sz_resume_202005/model"
 	"sz_resume_202005/utils/zlog"
@@ -118,4 +119,18 @@ func DelArticleCategories(ids []int) (err error) {
 		zlog.Warn("delete rowsAffected not larger than 1")
 	}
 	return nil
+}
+
+//ExistArticleCategory 判断分类是否存在
+func ExistArticleCategory(id int) (bool, error) {
+	var rac int
+	sqlStr := "select category_id from article_category where category_id=? "
+	err := db.Get(&rac, sqlStr, id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, err
 }

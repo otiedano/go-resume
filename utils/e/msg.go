@@ -16,6 +16,9 @@ var MsgFlags = map[int]string{
 	ERROR_RECORD_EXIST:     "记录已存在",
 	ERROR_COUNT_RECORD:     "统计记录失败",
 	ERROR_UPDATE_RECORD:    "更新访问信息失败",
+	ERROR_CHECK_RECORD:     "审核记录失败",
+	ERROR_GET_ROLE:         "获取权限信息失败",
+	ERROR_INIT_PARAM:       "参数处理失败",
 
 	ERROR_AUTH_CHECK_TOKEN_FAIL:    "Token鉴权失败",
 	ERROR_AUTH_CHECK_TOKEN_TIMEOUT: "Token已超时",

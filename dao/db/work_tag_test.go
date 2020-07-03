@@ -13,7 +13,7 @@ func TestAddTag(t *testing.T) {
 	tag := &model.WorkTag{
 		TagName: "Flash",
 	}
-	err := AddTag(tag)
+	_, err := AddTag(tag)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -66,5 +66,15 @@ func TestGetTags(t *testing.T) {
 	}
 	for _, v := range tags {
 		fmt.Printf("tag:%+v\n", v)
+	}
+}
+func TestExistWorkTag(t *testing.T) {
+
+	b, err := ExistWorkTag(5)
+	if err != nil {
+		t.Error(err)
+	}
+	if !b {
+		t.Error("not expect result")
 	}
 }

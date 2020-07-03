@@ -71,3 +71,12 @@ func TestEditACategories(t *testing.T) {
 		t.Error("EditArticleCategories failed,err:", err)
 	}
 }
+func TestExistArticleCategory(t *testing.T) {
+	b, err := ExistArticleCategory(8)
+	if err != nil {
+		t.Error(err)
+	}
+	if !b {
+		t.Error("not expect result")
+	}
+}

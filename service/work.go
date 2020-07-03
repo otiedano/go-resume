@@ -29,7 +29,7 @@ func GetWorksByTag(tagID int, page int) (works []*model.Work, err error) {
 }
 
 //AddWork 新增作品--事务，多表
-func AddWork(userID int, work *model.WorkDetail) (err error) {
+func AddWork(userID int, work *model.WorkDetail) (int, error) {
 	work.UserID = userID
 	return db.AddWork(userID, work)
 }
@@ -85,17 +85,17 @@ func RAGetAllWorksByStatus(page int, args ...interface{}) ([]*model.Work, error)
 }
 
 //TotalWorkByAuthor 根据userID来计算文章
-func TotalWorkByAuthor(userID int, args ...interface{}) (int, error) {
-	return db.TotalArticleByAuthor(userID, args...)
+func TotalWorkByAuthor(userID int) (int, error) {
+	return db.TotalWorkByAuthor(userID)
 }
 
 //TotalWork 计算作品记录，审核通过，或者未删除的数量。
-func TotalWork(args ...interface{}) (int, error) {
-	return db.TotalWork(args...)
+func TotalWork() (int, error) {
+	return db.TotalWork()
 }
 
-//RATotalWorkByStatus 管理员计算
-func RATotalWorkByStatus(args ...interface{}) (int, error) {
+//RATotalWork 管理员计算
+func RATotalWork(args ...interface{}) (int, error) {
 	return db.TotalWorkByStatus(args...)
 }
 

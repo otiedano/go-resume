@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"sz_resume_202005/model"
 	"sz_resume_202005/service"
@@ -28,9 +27,7 @@ func CheckToken() gin.HandlerFunc {
 
 		if len(t.Token) > 0 {
 			val, exist, err = service.CheckToken(t.Token)
-			fmt.Printf("err:%v\n", err)
-			fmt.Printf("exist:%v\n", exist)
-			fmt.Printf("val:%+v\n", val)
+
 			if err != nil {
 
 				g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)

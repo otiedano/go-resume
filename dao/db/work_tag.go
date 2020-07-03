@@ -1,9 +1,11 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 	"sz_resume_202005/model"
 	"time"
+	"unsafe"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -11,11 +13,17 @@ import (
 //标签管理部分
 
 //AddTag 新增标签
-func AddTag(tag *model.WorkTag) (err error) {
+func AddTag(tag *model.WorkTag) (intNum int, err error) {
 	sqlStr := `
 	INSERT INTO work_tag (tag_name,tag_no) VALUES (?,?)
    `
-	_, err = db.Exec(sqlStr, tag.TagName, tag.TagNO)
+	rs, err := db.Exec(sqlStr, tag.TagName, tag.TagNO)
+	id64, err := rs.LastInsertId()
+	if err != nil {
+		return
+	}
+	intNum = *(*int)(unsafe.Pointer(&id64))
+
 	return
 }
 
@@ -84,4 +92,18 @@ func GetTags() (tags []*model.WorkTag, err error) {
   `
 	err = db.Select(&tags, sqlStr)
 	return
+}
+
+//ExistWorkTag 判断标签是否存在
+func ExistWorkTag(id int) (bool, error) {
+	var rac int
+	sqlStr := "select tag_id from work_tag where tag_id=? "
+	err := db.Get(&rac, sqlStr, id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, err
 }
