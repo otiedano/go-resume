@@ -358,6 +358,7 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 			}
 			works = append(works, w)
 		}
+		return works, nil
 	}
 
 	sqlStr := `
@@ -494,10 +495,10 @@ func EditWork(userID int, work *model.WorkDetail) (err error) {
 
 	//work表新增
 	sqlStr := `
-	UPDATE work SET title=?,work_no=?,img=?,cover_img=?,content=?,start_time=?,end_time=?,if_horizons=?
+	UPDATE work SET title=?,work_no=?,img=?,cover_img=?,content=?,start_time=?,end_time=?,if_horizons=?,update_time=?
 	WHERE work_id=? And user_id=?
 	`
-	_, err = tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.Content, work.StartTime, work.EndTime, work.IfHorizons, work.WorkID, userID)
+	_, err = tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.Content, work.StartTime, work.EndTime, work.IfHorizons, time.Now(), work.WorkID, userID)
 	if err != nil {
 		zlog.Error(err)
 		return

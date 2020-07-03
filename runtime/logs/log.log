@@ -2608,3 +2608,163 @@
 {"level":"debug","ts":"2020-07-03T14:06:04.702+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
 {"level":"debug","ts":"2020-07-03T14:06:04.702+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
 {"level":"error","ts":"2020-07-03T14:06:04.702+0800","caller":"v1/works.go:136","msg":"img_no Can not be empty"}
+{"level":"debug","ts":"2020-07-03T14:43:10.514+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:43:10.515+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:43:10.515+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:43:42.964+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:43:42.964+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:43:42.964+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:45:22.946+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:45:22.946+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:45:22.946+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:48:07.215+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:48:07.216+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:48:07.216+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:48:19.018+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:48:19.018+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:48:19.018+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:48:29.012+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:48:29.012+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:48:29.012+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:49:25.866+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:49:25.866+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:49:25.866+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:49:33.542+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:49:33.543+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:49:33.543+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:50:14.079+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:50:14.079+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:50:14.079+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:50:18.902+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:50:18.903+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:50:18.903+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:50:32.583+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:50:32.583+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:50:32.583+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:51:42.639+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:51:42.639+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:51:42.639+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:52:03.216+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:52:03.216+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:52:03.217+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:52:07.796+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:52:07.796+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:52:07.796+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:52:07.797+0800","caller":"v1/works.go:445","msg":"articleID record not exist"}
+{"level":"debug","ts":"2020-07-03T14:53:01.907+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:53:01.907+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:53:01.907+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:53:06.453+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:53:06.453+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:53:06.453+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:53:06.453+0800","caller":"v1/works.go:445","msg":"articleID record not exist"}
+{"level":"debug","ts":"2020-07-03T14:53:12.035+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:53:12.035+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:53:12.035+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:54:11.398+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:54:11.398+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:54:11.398+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:54:15.992+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:54:15.992+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:54:15.992+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:54:15.993+0800","caller":"v1/works.go:452","msg":"sql: no rows in result set"}
+{"level":"debug","ts":"2020-07-03T14:54:20.062+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:54:20.062+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:54:20.062+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:54:20.063+0800","caller":"v1/works.go:452","msg":"sql: no rows in result set"}
+{"level":"debug","ts":"2020-07-03T14:55:12.915+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:55:12.916+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:55:12.916+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:55:12.917+0800","caller":"v1/works.go:445","msg":"articleID record not exist"}
+{"level":"debug","ts":"2020-07-03T14:55:28.741+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:55:28.741+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:55:28.741+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:55:37.122+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:55:37.122+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:55:37.122+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:55:37.122+0800","caller":"v1/works.go:445","msg":"articleID record not exist"}
+{"level":"debug","ts":"2020-07-03T14:56:04.055+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:56:04.056+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:56:04.056+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:56:13.541+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:56:13.541+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:56:13.542+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:56:29.223+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:56:29.223+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:56:29.223+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:57:33.210+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:57:33.210+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:57:33.210+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:57:33.210+0800","caller":"v1/works.go:212","msg":"img_no Can not be empty"}
+{"level":"debug","ts":"2020-07-03T14:58:00.743+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:58:00.743+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:58:00.743+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:58:00.744+0800","caller":"v1/works.go:226","msg":"v.TagID not exist"}
+{"level":"debug","ts":"2020-07-03T14:58:28.689+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:58:28.689+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:58:28.689+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T14:58:28.690+0800","caller":"v1/works.go:226","msg":"v.TagID not exist"}
+{"level":"debug","ts":"2020-07-03T14:58:37.399+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T14:58:37.399+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T14:58:37.399+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T14:58:37.400+0800","caller":"db/work.go:509","msg":"len(workImgs)2"}
+{"level":"debug","ts":"2020-07-03T14:58:37.400+0800","caller":"db/work.go:519","msg":"图库ids:[]"}
+{"level":"debug","ts":"2020-07-03T14:58:37.401+0800","caller":"db/work.go:587","msg":"标签tagids:[52]"}
+{"level":"debug","ts":"2020-07-03T15:02:04.590+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:02:04.590+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:02:04.590+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:02:04.591+0800","caller":"db/work.go:509","msg":"len(workImgs)2"}
+{"level":"debug","ts":"2020-07-03T15:02:04.591+0800","caller":"db/work.go:519","msg":"图库ids:[]"}
+{"level":"debug","ts":"2020-07-03T15:02:04.592+0800","caller":"db/work.go:587","msg":"标签tagids:[52]"}
+{"level":"debug","ts":"2020-07-03T15:02:23.357+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:02:23.358+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:02:23.358+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:02:23.359+0800","caller":"db/work.go:509","msg":"len(workImgs)2"}
+{"level":"debug","ts":"2020-07-03T15:02:23.359+0800","caller":"db/work.go:519","msg":"图库ids:[]"}
+{"level":"debug","ts":"2020-07-03T15:02:23.360+0800","caller":"db/work.go:587","msg":"标签tagids:[52]"}
+{"level":"debug","ts":"2020-07-03T15:04:52.319+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:04:52.319+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:04:52.319+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:04:52.319+0800","caller":"v1/works.go:277","msg":"ids:[10 11 101],len:3\n"}
+{"level":"debug","ts":"2020-07-03T15:04:53.430+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:04:53.430+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:04:53.430+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:04:53.430+0800","caller":"v1/works.go:277","msg":"ids:[10 11 101],len:3\n"}
+{"level":"debug","ts":"2020-07-03T15:05:17.927+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:05:17.927+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:05:17.927+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T15:05:17.927+0800","caller":"v1/works.go:267","msg":"ShouldBind failed,err:invalid character ']' looking for beginning of value"}
+{"level":"debug","ts":"2020-07-03T15:05:24.061+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:05:24.061+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:05:24.061+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:05:24.061+0800","caller":"v1/works.go:277","msg":"ids:[10],len:1\n"}
+{"level":"debug","ts":"2020-07-03T15:05:54.974+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:05:54.974+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:05:54.974+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:07:51.148+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:07:51.148+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:07:51.148+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T15:07:51.148+0800","caller":"v1/works.go:328","msg":"status Can not be empty"}
+{"level":"error","ts":"2020-07-03T15:07:51.148+0800","caller":"v1/works.go:328","msg":"articlesCan not be empty"}
+{"level":"debug","ts":"2020-07-03T15:08:48.975+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:08:48.975+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:08:48.975+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"error","ts":"2020-07-03T15:08:48.976+0800","caller":"v1/works.go:328","msg":"status Can not be empty"}
+{"level":"debug","ts":"2020-07-03T15:09:09.233+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:09:09.233+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:09:09.233+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:10:26.300+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:10:26.300+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:10:26.300+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:10:45.244+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:10:45.244+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:10:45.244+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:10:55.519+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:10:55.519+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:10:55.519+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:11:04.430+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:11:04.431+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:11:04.431+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
+{"level":"debug","ts":"2020-07-03T15:11:13.727+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-03T15:11:13.727+0800","caller":"middleware/token.go:70","msg":"user:{UserID:1 CreateTime:2020-06-17 16:19:27 +0800 CST Avatar:upload/images/avatar.png UserName:tiedan}"}
+{"level":"debug","ts":"2020-07-03T15:11:13.727+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}

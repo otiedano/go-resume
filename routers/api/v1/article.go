@@ -290,7 +290,7 @@ func RACheckArticle(c *gin.Context) {
 	}
 
 	valid := validation.Validation{}
-	valid.Required(ca.Status, "status ")
+
 	valid.Range(ca.Status, 0, 100, "status range ")
 	valid.Required(ca.Articles, "articles")
 

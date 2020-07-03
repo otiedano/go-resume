@@ -168,7 +168,7 @@ func AddWork(c *gin.Context) {
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{"work_id": intNum})
 }
 
-//EditWork 编辑编辑
+//EditWork 编辑作品
 func EditWork(c *gin.Context) {
 	g := g.G(c)
 	u := c.MustGet("user")
@@ -317,7 +317,7 @@ func RACheckWork(c *gin.Context) {
 	}
 
 	valid := validation.Validation{}
-	valid.Required(w.Status, "status ")
+
 	valid.Range(w.Status, 0, 100, "status range ")
 	valid.Required(w.Works, "articles")
 
@@ -432,7 +432,7 @@ func RAGetWorkDetail(c *gin.Context) {
 		return
 
 	}
-	b, err = service.RAExistArticle(workID)
+	b, err = service.RAExistWork(workID)
 	if err != nil {
 
 		zlog.Error(err)
@@ -443,7 +443,7 @@ func RAGetWorkDetail(c *gin.Context) {
 	if !b {
 
 		zlog.Errorf("articleID record not exist")
-		g.Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
+		g.Response(http.StatusBadRequest, e.ERROR_RECORD_NOT_EXIST, nil)
 		return
 
 	}
