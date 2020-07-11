@@ -24,6 +24,7 @@ type User struct {
 	Avatar     string    `json:"avatar" db:"avatar" redis:"avatar"`                //头像
 	//Token     string    `json:"token" db:"token" redis:"token"`                   //token
 	UserName string `json:"user_name" db:"user_name" redis:"user_name" ` //用户昵称
+	Role     string `json:"role" db:"role" redis:"role" `                //权限
 }
 
 //UserInfo 用户信息

@@ -42,7 +42,7 @@ func CheckUserAuth(u *model.UserAuth) (ifExist bool, err error) {
 
 //GetUser 获取用户基本信息
 func GetUser(u *model.UserAuth) (*model.User, error) {
-	sqlStr := "select user_id, user_name, avatar,create_time from user where user_name=? and password=?"
+	sqlStr := "select user_id, user_name, avatar,create_time,role from user where user_name=? and password=?"
 	//sqlStr := "select user_id from user where user_name=?"
 	var user model.User
 	err := db.Get(&user, sqlStr, u.UserName, utils.EncodeSHA256(u.Password))

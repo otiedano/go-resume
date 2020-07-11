@@ -2770,3 +2770,5 @@
 {"level":"debug","ts":"2020-07-03T15:11:13.727+0800","caller":"middleware/token.go:77","msg":"checktoken通过","user":{"user_id":1,"create_time":"2020-06-17T16:19:27+08:00","avatar":"upload/images/avatar.png","user_name":"tiedan"}}
 {"level":"panic","ts":"2020-07-03T19:21:43.236+0800","caller":"redisdb/db.go:17","msg":"dial tcp [::1]:6379: connect: connection refused"}
 {"level":"debug","ts":"2020-07-03T19:22:14.685+0800","caller":"db/user_test.go:19","msg":"test~"}
+{"level":"debug","ts":"2020-07-10T09:58:13.662+0800","caller":"middleware/token.go:18","msg":"checkToken"}
+{"level":"debug","ts":"2020-07-10T10:40:34.288+0800","caller":"middleware/token.go:18","msg":"checkToken"}
