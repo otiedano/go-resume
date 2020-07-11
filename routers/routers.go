@@ -48,7 +48,7 @@ func loadBack(g *gin.RouterGroup) {
 
 	//软件
 	//-获取全部软件
-	g.GET("/softwares", api.GetSkills)
+	g.GET("/softwares", api.GetSoftwares)
 	//-添加软件
 	g.POST("/softwares", api.AddSoftware)
 	//-编辑软件
