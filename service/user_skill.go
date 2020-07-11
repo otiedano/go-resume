@@ -22,7 +22,7 @@ func EditSkill(userID int, skill *model.Skill) error {
 	return db.EditSkill(skill)
 }
 
-//ExistSkill 编辑技能
+//ExistSkill 技能是否存在
 func ExistSkill(userID int, skill *model.Skill) (bool, error) {
 	skill.UserID = userID
 

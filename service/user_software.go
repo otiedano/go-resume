@@ -22,7 +22,7 @@ func EditSoftware(userID int, software *model.Software) error {
 	return db.EditSoftware(software)
 }
 
-//ExistSoftware 编辑软件
+//ExistSoftware 软件是否存在
 func ExistSoftware(userID int, software *model.Software) (bool, error) {
 	software.UserID = userID
 

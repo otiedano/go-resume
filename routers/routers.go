@@ -39,9 +39,10 @@ func loadBack(g *gin.RouterGroup) {
 	//-添加技能
 	g.POST("/skills", api.AddSkill)
 	//-编辑技能
-	g.PUT("/skills/id/:id", api.EditSkill)
-	//-批量编辑技能
 	g.PUT("/skills", api.EditSkill)
+	//g.PUT("/skills/id/:id", api.EditSkill)
+	//-批量编辑技能
+	//g.PUT("/skills", api.EditSkill)
 	//-删除技能
 	g.DELETE("/skills", api.DelSkills)
 
@@ -51,9 +52,10 @@ func loadBack(g *gin.RouterGroup) {
 	//-添加软件
 	g.POST("/softwares", api.AddSoftware)
 	//-编辑软件
-	g.PUT("/softwares/id/:id", api.EditSoftware)
-	//-批量编辑软件
 	g.PUT("/softwares", api.EditSoftware)
+	//g.PUT("/softwares/id/:id", api.EditSoftware)
+	//-批量编辑软件
+	//g.PUT("/softwares", api.EditSoftware)
 	//-删除软件
 	g.DELETE("/softwares", api.DelSoftwares)
 
