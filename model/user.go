@@ -30,7 +30,7 @@ type User struct {
 //UserInfo 用户信息
 type UserInfo struct {
 	User                 //--用户类型
-	Career        string `json:"career" db:"career" redis:"career" valid:"Max(20)"`                             //职位
+	Career        string `json:"career" db:"career" redis:"career" valid:"MaxSize(20)"`                         //职位
 	Mobile        string `json:"mobile" db:"mobile" redis:"mobile" valid:"Mobile" `                             //手机
 	Mail          string `json:"mail" db:"mail" redis:"mail" valid:"Email"`                                     //邮件
 	Location      string `json:"location" db:"location" redis:"location" valid:"Required"`                      //地点

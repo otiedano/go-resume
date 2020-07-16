@@ -22,9 +22,7 @@ func GetUserInfo(c *gin.Context) {
 		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
 		return
 	}
-	g.Response(http.StatusOK, e.SUCCESS, gin.H{
-		"userInfo": userInfo,
-	})
+	g.Response(http.StatusOK, e.SUCCESS, userInfo)
 }
 
 //EditUserInfo 编辑用户信息

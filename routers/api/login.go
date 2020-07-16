@@ -7,9 +7,7 @@ import (
 	"sz_resume_202005/service"
 	"sz_resume_202005/utils/e"
 	"sz_resume_202005/utils/g"
-	"sz_resume_202005/utils/setting"
 	"sz_resume_202005/utils/zlog"
-	"time"
 
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
@@ -21,12 +19,12 @@ func Login(c *gin.Context) {
 	g := g.G(c)
 	valid := validation.Validation{}
 
-	username := c.PostForm("username")
-	password := c.PostForm("password")
-
-	userAuth := &model.UserAuth{
-		UserName: username,
-		Password: password,
+	userAuth := &model.UserAuth{}
+	err := c.ShouldBind(userAuth)
+	if err != nil {
+		zlog.Error(err)
+		g.Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
+		return
 	}
 	//检查参数合法性
 	ok, _ := valid.Valid(userAuth)
@@ -59,10 +57,10 @@ func Login(c *gin.Context) {
 		g.Response(http.StatusInternalServerError, e.ERROR_AUTH_TOKEN, nil)
 		return
 	}
-	t := time.Now()
+	//t := time.Now()
 
-	c.SetCookie("token", token, setting.AppSetting.TokenExpire, "/", setting.AppSetting.Domain, false, true)
-	c.SetCookie("timestamp", strconv.FormatInt(t.Unix(), 10), setting.AppSetting.TokenExpire, "/", setting.AppSetting.Domain, false, true)
+	//c.SetCookie("token", token, setting.AppSetting.TokenExpire, "/", setting.AppSetting.Domain, false, true)
+	//c.SetCookie("timestamp", strconv.FormatInt(t.Unix(), 10), setting.AppSetting.TokenExpire, "/", setting.AppSetting.Domain, false, true)
 	scook, _ := c.Cookie("token")
 	zlog.Debug("scook", scook)
 
@@ -83,8 +81,8 @@ func Logout(c *gin.Context) {
 
 	g.G(c).Response(http.StatusOK, e.SUCCESS, nil)
 
-	c.SetCookie("token", "", -1, "/", setting.AppSetting.Domain, false, true)
-	c.SetCookie("timestamp", "", -1, "/", setting.AppSetting.Domain, false, true)
+	//c.SetCookie("token", "", -1, "/", setting.AppSetting.Domain, false, true)
+	//c.SetCookie("timestamp", "", -1, "/", setting.AppSetting.Domain, false, true)
 
 }
 

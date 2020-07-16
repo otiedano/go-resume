@@ -32,6 +32,7 @@ func UploadImage(c *gin.Context) {
 	}
 
 	if image == nil {
+		zlog.Warn("没读取到图片")
 		g.Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
 		return
 	}
@@ -48,6 +49,7 @@ func UploadImage(c *gin.Context) {
 	src := fullPath + imageName
 
 	if !upload.CheckImageExt(imageName) || !upload.CheckImageSize(file) {
+		zlog.Error("err:图片格式或尺寸错误")
 		g.Response(http.StatusBadRequest, e.ERROR_UPLOAD_CHECK_IMAGE_FORMAT, nil)
 		return
 	}

@@ -81,10 +81,7 @@ func GetExperiences(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status":      "success",
-		"experiences": exps,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, exps)
 
 }
 
@@ -150,15 +147,25 @@ func DelExperiences(c *gin.Context) {
 		return
 	}
 
-	var a struct {
-		Experiences []int `json:"experiences"`
+	var ids []int
+	err := c.ShouldBind(&ids)
+	if err != nil {
+		zlog.Errorf("ShouldBind failed,err:%v", err)
+		g.G(c).Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
+		return
 	}
+	zlog.Debugf("ids:%v", ids)
+	zlog.Debugf("%T", ids)
 
-	err := c.Bind(&a)
 	if err != nil {
 		return
 	}
-	err = service.DelExperiences(user.UserID, a.Experiences)
+	if l := len(ids); l <= 0 {
+		zlog.Errorf("len(a)<=0")
+		g.G(c).Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
+		return
+	}
+	err = service.DelExperiences(user.UserID, ids)
 	if err != nil {
 		zlog.Errorf("service.DelExperiences failed,err:", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)

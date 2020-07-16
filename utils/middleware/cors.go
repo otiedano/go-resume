@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
+	"sz_resume_202005/utils/zlog"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,7 +10,7 @@ import (
 // Cors 处理跨域请求,支持options访问
 func Cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		log.Println("Cors launched")
+		zlog.Debug("Cors launched")
 		method := c.Request.Method
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token")

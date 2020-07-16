@@ -71,7 +71,7 @@ func AddUser(userName string, password string) (theID int64, err error) {
 //GetUserInfo 获取用户详细信息
 func GetUserInfo(id int) (userInfo *model.UserInfo, err error) {
 	userInfo = &model.UserInfo{}
-	sqlStr := "select user_id, user_name, avatar,create_time,mobile,mail,career,location, major,edu_background,working_age,introduce,has_edit from user where user_id=?"
+	sqlStr := "select user_id, user_name, avatar,create_time,mobile,mail,career,location, major,edu_background,working_age,introduce,has_edit,role from user where user_id=?"
 	err = db.Get(userInfo, sqlStr, id)
 	return
 }
