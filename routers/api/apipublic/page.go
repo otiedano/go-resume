@@ -22,7 +22,7 @@ func GetUserInfoCpt(c *gin.Context) {
 		g.Response(http.StatusInternalServerError, e.ERROR_GET_RECORD, nil)
 		return
 	}
-	exp, err := service.GetExperience(1)
+	exp, err := service.GetExperiences(1)
 	if err != nil {
 		zlog.Error(err)
 		g.Response(http.StatusInternalServerError, e.ERROR_GET_RECORD, nil)

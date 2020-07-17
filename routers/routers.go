@@ -30,12 +30,15 @@ func loadBack(g *gin.RouterGroup) {
 
 	g.POST("/experiences", api.AddExperiences)
 	g.GET("/experiences", api.GetExperiences)
+	g.GET("/experiences/id/:id", api.GetExperience)
 	g.PUT("/experiences", api.EditExperience)
 	g.DELETE("/experiences", api.DelExperiences)
 
 	//技能
 	//-获取全部技能
 	g.GET("/skills", api.GetSkills)
+
+	g.GET("/skills/id/:id", api.GetSkill)
 	//-添加技能
 	g.POST("/skills", api.AddSkill)
 	//-编辑技能
@@ -49,6 +52,7 @@ func loadBack(g *gin.RouterGroup) {
 	//软件
 	//-获取全部软件
 	g.GET("/softwares", api.GetSoftwares)
+	g.GET("/softwares/id/:id", api.GetSoftware)
 	//-添加软件
 	g.POST("/softwares", api.AddSoftware)
 	//-编辑软件

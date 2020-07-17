@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strconv"
 	"sz_resume_202005/model"
 	"sz_resume_202005/service"
 	"sz_resume_202005/utils/e"
@@ -49,10 +50,7 @@ func AddSoftware(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status":    "success",
-		"softwares": softwares,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, softwares)
 
 }
 
@@ -73,10 +71,56 @@ func GetSoftwares(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status":    "success",
-		"softwares": softwares,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, softwares)
+
+}
+
+//GetSoftware 获取工作经历
+func GetSoftware(c *gin.Context) {
+	g := g.G(c)
+	u := c.MustGet("user")
+	zlog.Debugf("u:%+v,type:%T,%v", u, u)
+	user, ok := u.(*model.User)
+	if !ok {
+		zlog.Errorf("user assertion error.\n")
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+
+	id := c.Param("id")
+	swID, err := strconv.Atoi(id)
+	if err != nil {
+
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+
+	}
+	s := &model.Software{UserID: user.UserID, SoftwareID: swID}
+	b, err := service.ExistSoftware(user.UserID, s)
+	if err != nil {
+
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+
+	}
+	if !b {
+
+		zlog.Errorf("skill record not exist")
+		g.Response(http.StatusBadRequest, e.ERROR_RECORD_NOT_EXIST, nil)
+		return
+
+	}
+
+	software, err := service.GetSoftware(user.UserID, s.SoftwareID)
+	if err != nil {
+		zlog.Errorf("get skill failed,err:%v\n", err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+
+	g.Response(http.StatusOK, e.SUCCESS, software)
 
 }
 
@@ -125,10 +169,7 @@ func EditSoftware(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status":    "success",
-		"softwares": softwares,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, softwares)
 
 }
 

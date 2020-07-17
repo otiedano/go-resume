@@ -11,10 +11,21 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-//GetSkills 获取skill
+//GetSkills 获取skill列表
 func GetSkills(userID int) (skills []*model.Skill, err error) {
 	sqlStr := "select skill_name,img,per,user_id,skill_id ,skill_no from skill where user_id=? order by skill_no asc"
 	err = db.Select(&skills, sqlStr, userID)
+	return
+}
+
+//GetSkill 获取skill
+func GetSkill(userID int, id int) (skill *model.Skill, err error) {
+
+	skill = &model.Skill{}
+	sqlStr := "select skill_name,img,per,user_id,skill_id ,skill_no from skill where user_id=? and skill_id=?"
+
+	err = db.Get(skill, sqlStr, userID, id)
+
 	return
 }
 

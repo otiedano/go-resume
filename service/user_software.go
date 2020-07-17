@@ -10,6 +10,11 @@ func GetSoftwares(userID int) ([]*model.Software, error) {
 	return db.GetSoftwares(userID)
 }
 
+//GetSoftware 获取skill
+func GetSoftware(userID int, id int) (software *model.Software, err error) {
+	return db.GetSoftware(userID, id)
+}
+
 //AddSoftware 新增软件
 func AddSoftware(userID int, software *model.Software) error {
 	software.UserID = userID

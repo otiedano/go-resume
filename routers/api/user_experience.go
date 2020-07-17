@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strconv"
 	"sz_resume_202005/model"
 	"sz_resume_202005/service"
 	"sz_resume_202005/utils/e"
@@ -50,7 +51,7 @@ func AddExperiences(c *gin.Context) {
 
 	zlog.Debug("addexperience:", ep)
 
-	exps, err := service.GetExperience(user.UserID)
+	exps, err := service.GetExperiences(user.UserID)
 	if err != nil {
 		zlog.Errorf("get experience failed,err:%v\n", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
@@ -74,7 +75,7 @@ func GetExperiences(c *gin.Context) {
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
 		return
 	}
-	exps, err := service.GetExperience(user.UserID)
+	exps, err := service.GetExperiences(user.UserID)
 	if err != nil {
 		zlog.Errorf("get experience failed,err:%v\n", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
@@ -82,6 +83,54 @@ func GetExperiences(c *gin.Context) {
 	}
 
 	g.G(c).Response(http.StatusOK, e.SUCCESS, exps)
+
+}
+
+//GetExperience 获取工作经历
+func GetExperience(c *gin.Context) {
+	u := c.MustGet("user")
+	zlog.Debugf("u:%+v,type:%T,%v", u, u)
+	user, ok := u.(*model.User)
+	if !ok {
+		zlog.Errorf("user assertion error.\n")
+		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+	g := g.G(c)
+	id := c.Param("id")
+	expID, err := strconv.Atoi(id)
+	if err != nil {
+
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+
+	}
+	ex := &model.Experience{UserID: user.UserID, ExpID: expID}
+	b, err := service.ExistExperience(user.UserID, ex)
+	if err != nil {
+
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+
+	}
+	if !b {
+
+		zlog.Errorf("experience record not exist")
+		g.Response(http.StatusBadRequest, e.ERROR_RECORD_NOT_EXIST, nil)
+		return
+
+	}
+
+	exp, err := service.GetExperience(user.UserID, ex.ExpID)
+	if err != nil {
+		zlog.Errorf("get experience failed,err:%v\n", err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+
+	g.Response(http.StatusOK, e.SUCCESS, exp)
 
 }
 
@@ -122,7 +171,7 @@ func EditExperience(c *gin.Context) {
 		return
 	}
 
-	exps, err := service.GetExperience(user.UserID)
+	exps, err := service.GetExperiences(user.UserID)
 	if err != nil {
 		zlog.Errorf("get experience failed,err:%v\n", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
@@ -172,7 +221,7 @@ func DelExperiences(c *gin.Context) {
 		return
 	}
 
-	exps, err := service.GetExperience(user.UserID)
+	exps, err := service.GetExperiences(user.UserID)
 	if err != nil {
 		zlog.Errorf("get experience failed,err:%v\n", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)

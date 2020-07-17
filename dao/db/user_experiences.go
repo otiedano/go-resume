@@ -10,8 +10,8 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-//GetExperience 查看工作经历
-func GetExperience(id int) (userExp []*model.Experience, err error) {
+//GetExperiences 查看工作经历
+func GetExperiences(id int) (userExp []*model.Experience, err error) {
 	sqlStr := "select company, content,start_time,end_time,salary,leave_reason,user_id,exp_id from experience where user_id=? order by start_time asc"
 	err = db.Select(&userExp, sqlStr, id)
 	return
@@ -212,4 +212,12 @@ func ExistExperience(exp *model.Experience) (bool, error) {
 		return false, err
 	}
 	return true, err
+}
+
+//GetExperience 查看工作经历
+func GetExperience(userID int, expID int) (exp *model.Experience, err error) {
+	exp = &model.Experience{}
+	sqlStr := "select company, content,start_time,end_time,salary,leave_reason,user_id,exp_id from experience where user_id=? and exp_id=?"
+	err = db.Get(exp, sqlStr, userID, expID)
+	return
 }

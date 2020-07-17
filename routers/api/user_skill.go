@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strconv"
 	"sz_resume_202005/model"
 	"sz_resume_202005/service"
 	"sz_resume_202005/utils/e"
@@ -49,10 +50,7 @@ func AddSkill(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status": "success",
-		"skills": skills,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, skills)
 
 }
 
@@ -73,10 +71,56 @@ func GetSkills(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status": "success",
-		"skills": skills,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, skills)
+
+}
+
+//GetSkill 获取工作经历
+func GetSkill(c *gin.Context) {
+	g := g.G(c)
+	u := c.MustGet("user")
+	zlog.Debugf("u:%+v,type:%T,%v", u, u)
+	user, ok := u.(*model.User)
+	if !ok {
+		zlog.Errorf("user assertion error.\n")
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+
+	id := c.Param("id")
+	skillID, err := strconv.Atoi(id)
+	if err != nil {
+
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+
+	}
+	s := &model.Skill{UserID: user.UserID, SkillID: skillID}
+	b, err := service.ExistSkill(user.UserID, s)
+	if err != nil {
+
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+
+	}
+	if !b {
+
+		zlog.Errorf("skill record not exist")
+		g.Response(http.StatusBadRequest, e.ERROR_RECORD_NOT_EXIST, nil)
+		return
+
+	}
+
+	skill, err := service.GetSkill(user.UserID, s.SkillID)
+	if err != nil {
+		zlog.Errorf("get skill failed,err:%v\n", err)
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+
+	g.Response(http.StatusOK, e.SUCCESS, skill)
 
 }
 
@@ -125,10 +169,7 @@ func EditSkill(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status": "success",
-		"skills": skills,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, skills)
 
 }
 
@@ -143,15 +184,13 @@ func DelSkills(c *gin.Context) {
 		return
 	}
 
-	var a struct {
-		Skills []int `json:"skills"`
-	}
+	var a []int
+	err := c.ShouldBind(&a)
 
-	err := c.Bind(&a)
 	if err != nil {
 		return
 	}
-	err = service.DelSkills(user.UserID, a.Skills)
+	err = service.DelSkills(user.UserID, a)
 	if err != nil {
 		zlog.Errorf("service.DelSkills failed,err:", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
@@ -165,8 +204,5 @@ func DelSkills(c *gin.Context) {
 		return
 	}
 
-	g.G(c).Response(http.StatusOK, e.SUCCESS, gin.H{
-		"status": "success",
-		"skills": skills,
-	})
+	g.G(c).Response(http.StatusOK, e.SUCCESS, skills)
 }

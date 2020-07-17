@@ -5,10 +5,15 @@ import (
 	"sz_resume_202005/model"
 )
 
-//GetExperience 查看用户工作经历
-func GetExperience(userID int) ([]*model.Experience, error) {
-	return db.GetExperience(userID)
+//GetExperiences 查看用户工作经历
+func GetExperiences(userID int) ([]*model.Experience, error) {
+	return db.GetExperiences(userID)
 
+}
+
+//GetExperience 查看工作经历
+func GetExperience(userID int, expID int) (exp *model.Experience, err error) {
+	return db.GetExperience(userID, expID)
 }
 
 //AddExperiences 新增工作经历

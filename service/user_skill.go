@@ -10,6 +10,11 @@ func GetSkills(userID int) ([]*model.Skill, error) {
 	return db.GetSkills(userID)
 }
 
+//GetSkill 获取skill
+func GetSkill(userID int, id int) (skill *model.Skill, err error) {
+	return db.GetSkill(userID, id)
+}
+
 //AddSkill 新增技能
 func AddSkill(userID int, skill *model.Skill) error {
 	skill.UserID = userID

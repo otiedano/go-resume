@@ -8,8 +8,8 @@ import (
 )
 
 //GetExperience 查看工作经历
-func TestGetExperience(t *testing.T) {
-	exps, err := GetExperience(1)
+func TestGetExperiences(t *testing.T) {
+	exps, err := GetExperiences(1)
 	if err != nil {
 		t.Error("err:", err)
 	}
@@ -104,7 +104,7 @@ func TestEditExperience(t *testing.T) {
 
 //DelExperiences
 func TestDelExperiences(t *testing.T) {
-	exps, err := GetExperience(1)
+	exps, err := GetExperiences(1)
 	if err != nil {
 		t.Error(err)
 	}

@@ -2,7 +2,7 @@ package e
 
 var MsgFlags = map[int]string{
 	SUCCESS:        "ok",
-	INTERNALERROR:  "fail",
+	INTERNALERROR:  "服务器内部错误",
 	INVALID_PARAMS: "请求参数错误",
 	UNAUTHORIZED:   "没有访问权限,请登录或向管理员申请权限",
 

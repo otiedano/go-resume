@@ -18,6 +18,14 @@ func GetSoftwares(userID int) (softwares []*model.Software, err error) {
 	return
 }
 
+//GetSoftware 获取skill
+func GetSoftware(userID int, id int) (software *model.Software, err error) {
+	software = &model.Software{}
+	sqlStr := "select software_name,img,user_id,software_id,software_no from software where user_id=? and software_id=?"
+	err = db.Select(software, sqlStr, userID, id)
+	return
+}
+
 //AddSoftware 单个加software
 func AddSoftware(software *model.Software) (err error) {
 	sqlStr := "insert into software (software_name,img,user_id,software_no) values (?,?,?,?)"
