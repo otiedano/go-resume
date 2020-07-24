@@ -49,6 +49,39 @@ func GetArticleCategory(c *gin.Context) {
 
 }
 
+//GetAllArticleCategory 获取全部分类
+func GetAllArticleCategory(c *gin.Context) {
+	g := g.G(c)
+	u := c.MustGet("user")
+	user, ok := u.(*model.User)
+	if !ok {
+		zlog.Errorf("user assertion error.\n")
+		g.Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
+		return
+	}
+
+	b, err := service.IsAdmin(user.UserID)
+	if err != nil {
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.ERROR_GET_ROLE, nil)
+		return
+	}
+
+	if !b {
+		zlog.Error(e.GetMsg(e.UNAUTHORIZED))
+		g.Response(http.StatusUnauthorized, e.UNAUTHORIZED, nil)
+		return
+	}
+	articleCategory, err := service.GetAllArticleCategories()
+	if err != nil {
+		zlog.Error(err)
+		g.Response(http.StatusInternalServerError, e.ERROR_GET_RECORDS, nil)
+		return
+	}
+	g.Response(http.StatusOK, e.SUCCESS, articleCategory)
+
+}
+
 //AddArticleCategory 添加分类
 func AddArticleCategory(c *gin.Context) {
 	g := g.G(c)

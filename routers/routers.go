@@ -14,6 +14,7 @@ func LoadRouters(r *gin.Engine) {
 
 	API := r.Group("/api")
 	API.POST("/login", api.Login)
+	API.POST("/uploadimg", api.UploadImg)
 
 	AUTH := API.Group("/auth")
 	AUTH.Use(middleware.CheckToken())
@@ -87,6 +88,8 @@ func loadBack(g *gin.RouterGroup) {
 	//文章分类
 	//-获取全部分类
 	g.GET("/articles/categories", v1.GetArticleCategory)
+	//-获取全部分类
+	g.GET("/articles/categories/all", v1.GetAllArticleCategory)
 	//-添加分类
 	g.POST("/articles/categories", v1.AddArticleCategory)
 	//-编辑分类
@@ -133,6 +136,7 @@ func loadBack(g *gin.RouterGroup) {
 	//-给予权限
 	//-删除权限
 	g.POST("/upload", api.UploadImage)
+	g.POST("/uploadimg", api.UploadImg)
 
 }
 

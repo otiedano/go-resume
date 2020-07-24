@@ -22,7 +22,7 @@ func GetSoftwares(userID int) (softwares []*model.Software, err error) {
 func GetSoftware(userID int, id int) (software *model.Software, err error) {
 	software = &model.Software{}
 	sqlStr := "select software_name,img,user_id,software_id,software_no from software where user_id=? and software_id=?"
-	err = db.Select(software, sqlStr, userID, id)
+	err = db.Get(software, sqlStr, userID, id)
 	return
 }
 

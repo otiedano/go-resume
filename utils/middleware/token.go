@@ -16,6 +16,7 @@ import (
 func CheckToken() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		zlog.Debug("checkToken")
+		zlog.Debug(c.GetHeader("Cookies"))
 		var (
 			t     model.UserToken
 			val   string
@@ -45,19 +46,20 @@ func CheckToken() gin.HandlerFunc {
 		} else {
 			err = c.BindJSON(&t)
 			if err != nil {
+				zlog.Error(err)
 				g.G(c).Response(http.StatusBadRequest, e.INTERNALERROR, nil)
 				c.Abort()
 				return
 			}
 			val, exist, err = service.CheckToken(t.Token)
 			if err != nil {
-
+				zlog.Error(err)
 				g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
 				c.Abort()
 				return
 			}
 			if !exist {
-
+				zlog.Error(err)
 				g.G(c).Response(http.StatusUnauthorized, e.UNAUTHORIZED, nil)
 				c.Abort()
 				return
@@ -69,6 +71,7 @@ func CheckToken() gin.HandlerFunc {
 		err = json.Unmarshal([]byte(val), &user)
 		zlog.Debugf("user:%+v", user)
 		if err != nil {
+			zlog.Error(err)
 			g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)
 			c.Abort()
 			return

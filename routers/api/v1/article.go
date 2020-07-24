@@ -2,12 +2,14 @@ package v1
 
 import (
 	"fmt"
+	"math"
 	"net/http"
 	"strconv"
 	"sz_resume_202005/model"
 	"sz_resume_202005/service"
 	"sz_resume_202005/utils/e"
 	"sz_resume_202005/utils/g"
+	"sz_resume_202005/utils/setting"
 	"sz_resume_202005/utils/zlog"
 
 	"github.com/astaxie/beego/validation"
@@ -50,8 +52,20 @@ func GetArticle(c *gin.Context) {
 		g.Response(http.StatusInternalServerError, e.ERROR_COUNT_RECORD, nil)
 		return
 	}
+	if len(articles) == 0 && total > 0 && page > 1 {
+
+		page = int(math.Ceil(float64(total) / float64(setting.PageSize)))
+		articles, err = service.GetArticlesByAuthor(user.UserID, page)
+		if err != nil {
+			zlog.Error(err)
+			g.Response(http.StatusInternalServerError, e.ERROR_GET_RECORDS, nil)
+			return
+		}
+	}
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{
 		"total":    total,
+		"current":  page,
+		"size":     setting.PageSize,
 		"articles": articles,
 	})
 }
@@ -173,7 +187,9 @@ func EditArticle(c *gin.Context) {
 	article := &model.ArticleDetail{}
 	err = c.ShouldBind(article)
 	if err != nil {
+		zlog.Error(err)
 		g.Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
+		return
 	}
 	article.ArticleID = articleID
 	fmt.Printf("article:%v\n", article)
@@ -217,7 +233,7 @@ func EditArticle(c *gin.Context) {
 	if err != nil {
 		zlog.Errorf("service.AddArticle failed,err:%v", err)
 		g.Response(http.StatusInternalServerError, e.ERROR_ADD_RECORD, nil)
-
+		return
 	}
 	g.Response(http.StatusOK, e.SUCCESS, nil)
 }
@@ -368,6 +384,8 @@ func RAGetArticle(c *gin.Context) {
 
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{
 		"total":    total,
+		"current":  page,
+		"size":     setting.PageSize,
 		"articles": articles,
 	})
 }

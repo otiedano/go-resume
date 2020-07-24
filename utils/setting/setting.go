@@ -38,6 +38,7 @@ var AppSetting = &App{}
 
 //App app设置
 type App struct {
+	Domain          string
 	PrefixURL       string
 	RuntimeRootPath string
 
@@ -51,7 +52,6 @@ type App struct {
 	LogLevel    string
 	TimeFormat  string
 
-	Domain      string
 	TokenExpire int
 }
 

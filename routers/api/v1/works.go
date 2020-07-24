@@ -7,6 +7,7 @@ import (
 	"sz_resume_202005/service"
 	"sz_resume_202005/utils/e"
 	"sz_resume_202005/utils/g"
+	"sz_resume_202005/utils/setting"
 	"sz_resume_202005/utils/zlog"
 
 	"github.com/astaxie/beego/validation"
@@ -50,8 +51,10 @@ func GetWork(c *gin.Context) {
 		return
 	}
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{
-		"total": total,
-		"works": works,
+		"total":   total,
+		"current": page,
+		"size":    setting.PageSize,
+		"works":   works,
 	})
 }
 
@@ -245,7 +248,7 @@ func EditWork(c *gin.Context) {
 	if err != nil {
 		zlog.Errorf("service.AddArticle failed,err:%v", err)
 		g.Response(http.StatusInternalServerError, e.ERROR_ADD_RECORD, nil)
-
+		return
 	}
 	g.Response(http.StatusOK, e.SUCCESS, nil)
 }
@@ -394,8 +397,10 @@ func RAGetWork(c *gin.Context) {
 	}
 
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{
-		"total": total,
-		"works": works,
+		"total":   total,
+		"current": page,
+		"size":    setting.PageSize,
+		"works":   works,
 	})
 }
 

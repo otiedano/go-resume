@@ -15,6 +15,11 @@ func GetArticleCategories() (categories []*model.ArticleCategory, err error) {
 	return db.GetArticleCategories()
 }
 
+//GetAllArticleCategories 读取文章分类
+func GetAllArticleCategories() (categories []*model.ArticleCategory, err error) {
+	return db.GetAllArticleCategories()
+}
+
 //EditArticleCategory 修改文章分类
 func EditArticleCategory(category *model.ArticleCategory) (err error) {
 	return db.EditArticleCategory(category)

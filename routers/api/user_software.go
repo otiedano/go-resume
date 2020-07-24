@@ -184,15 +184,12 @@ func DelSoftwares(c *gin.Context) {
 		return
 	}
 
-	var a struct {
-		Softwares []int `json:"softwares"`
-	}
-
-	err := c.Bind(&a)
+	var a []int
+	err := c.ShouldBind(&a)
 	if err != nil {
 		return
 	}
-	err = service.DelSoftwares(user.UserID, a.Softwares)
+	err = service.DelSoftwares(user.UserID, a)
 	if err != nil {
 		zlog.Errorf("service.DelSoftwares failed,err:", err)
 		g.G(c).Response(http.StatusInternalServerError, e.INTERNALERROR, nil)

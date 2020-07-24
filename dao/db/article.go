@@ -94,8 +94,9 @@ func GetRPArticle(articleID int) (article *model.ArticleDetail, err error) {
 //GetArticlesByAuthor 根据作者返回文章列表,用于后端管理
 func GetArticlesByAuthor(authorID int, offset, limit int) (articles []*model.Article, err error) {
 	sqlStr := `
-	SELECT a.article_id,a.title,a.img,a.view_count,a.status,a.summary,a.create_time,a.update_time,a.author_id,u.user_name,u.avatar,a.category_id,c.category_name,c.category_no
-	FROM article AS a 
+	SELECT a.article_id,a.title,a.img,a.view_count,a.status,a.summary,a.create_time,a.update_time,a.author_id,u.user_name,u.avatar,c.category_name,c.category_no,a.category_id
+	
+	 FROM article AS a 
 	LEFT JOIN article_category AS c ON a.category_id=c.category_id 
 	LEFT JOIN user AS u ON a.author_id=u.user_id 
 	WHERE a.author_id=? AND a.status!=2

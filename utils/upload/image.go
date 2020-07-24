@@ -15,6 +15,7 @@ import (
 
 // GetImageFullURL get the full access path
 func GetImageFullURL(name string) string {
+
 	return setting.AppSetting.PrefixURL + "/" + GetImagePath() + name
 }
 

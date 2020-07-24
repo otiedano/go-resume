@@ -34,7 +34,22 @@ func GetArticleCategories() (categories []*model.ArticleCategory, err error) {
 	sqlStr := `
 	SELECT category_id,category_name,category_no 
 	From article_category
+	WHERE category_id > 1
 	ORDER BY category_no desc,update_time desc
+	
+	`
+
+	err = db.Select(&categories, sqlStr)
+	return
+}
+
+//GetAllArticleCategories 读取所有文章分类
+func GetAllArticleCategories() (categories []*model.ArticleCategory, err error) {
+	sqlStr := `
+	SELECT category_id,category_name,category_no 
+	From article_category
+	ORDER BY category_no desc,update_time desc
+	 
 	`
 
 	err = db.Select(&categories, sqlStr)
