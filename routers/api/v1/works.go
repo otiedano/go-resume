@@ -123,7 +123,7 @@ func AddWork(c *gin.Context) {
 	}
 	valid := validation.Validation{}
 	valid.Required(work.Title, "title ")
-	valid.Required(work.CoverImg, "cover_imt ")
+	valid.Required(work.CoverImg, "cover_img ")
 	valid.Required(work.StartTime, "start_time ")
 	valid.Required(work.EndTime, "end_time ")
 	valid.Required(work.Content, "content ")
