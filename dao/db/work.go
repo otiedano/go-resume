@@ -297,7 +297,7 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
-		ORDER BY work_no desc
+		ORDER BY update_time desc
 		LIMIT ? OFFSET ?
 		`
 
@@ -333,7 +333,7 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		WHERE w.status=?
-		ORDER BY work_no desc
+		ORDER BY update_time desc
 		LIMIT ? OFFSET ?
 		`
 		r, err := db.Queryx(sqlStr, n, limit, offset)
@@ -365,7 +365,7 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
-		ORDER BY work_no desc
+		ORDER BY update_time desc
 		LIMIT ? OFFSET ?
 		`
 
@@ -495,7 +495,7 @@ func EditWork(userID int, work *model.WorkDetail) (err error) {
 
 	//work表新增
 	sqlStr := `
-	UPDATE work SET title=?,work_no=?,img=?,cover_img=?,content=?,start_time=?,end_time=?,if_horizons=?,update_time=?
+	UPDATE work SET title=?,work_no=?,img=?,cover_img=?,content=?,start_time=?,end_time=?,if_horizons=?,update_time=?,status=0
 	WHERE work_id=? And user_id=?
 	`
 	_, err = tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.Content, work.StartTime, work.EndTime, work.IfHorizons, time.Now(), work.WorkID, userID)

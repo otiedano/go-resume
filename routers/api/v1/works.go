@@ -322,7 +322,7 @@ func RACheckWork(c *gin.Context) {
 	valid := validation.Validation{}
 
 	valid.Range(w.Status, 0, 100, "status range ")
-	valid.Required(w.Works, "articles")
+	valid.Required(w.Works, "work ")
 
 	//检查参数合法性
 	ok, _ = valid.Valid(w)
