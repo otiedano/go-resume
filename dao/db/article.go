@@ -20,6 +20,20 @@ func TotalArticle() (num int, err error) {
 	return
 }
 
+//TotalArticleByCategory 计算文章总数
+func TotalArticleByCategory(categoryID int) (num int, err error) {
+	var sqlStr string
+	if categoryID == 0 {
+		sqlStr = "SELECT COUNT(article_id) from article where status=1"
+		err = db.Get(&num, sqlStr)
+	} else {
+		sqlStr = "SELECT COUNT(article_id) from article where category_id=? and status=1"
+		err = db.Get(&num, sqlStr, categoryID)
+	}
+
+	return
+}
+
 //TotalArticleByAuthor 计算文章总数
 func TotalArticleByAuthor(userID int) (num int, err error) {
 

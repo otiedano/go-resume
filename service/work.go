@@ -28,6 +28,12 @@ func GetWorksByTag(tagID int, page int) (works []*model.Work, err error) {
 	return db.GetWorksByTag(tagID, offset, setting.PageSize)
 }
 
+//GetWorksNoLimit 前端读取所有作品
+func GetWorksNoLimit() (works []*model.Work, err error) {
+
+	return db.GetWorksNoLimit()
+}
+
 //AddWork 新增作品--事务，多表
 func AddWork(userID int, work *model.WorkDetail) (int, error) {
 	work.UserID = userID
@@ -92,6 +98,11 @@ func TotalWorkByAuthor(userID int) (int, error) {
 //TotalWork 计算作品记录，审核通过，或者未删除的数量。
 func TotalWork() (int, error) {
 	return db.TotalWork()
+}
+
+//TotalWorkByTag 计算作品总数
+func TotalWorkByTag(tagID int) (num int, err error) {
+	return db.TotalWorkByTag(tagID)
 }
 
 //RATotalWork 管理员计算

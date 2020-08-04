@@ -151,10 +151,13 @@ func loadFront(g *gin.RouterGroup) {
 	//文章列表
 	g.GET("/articles", apipublic.GetArticles)
 	//文章详情
-	g.GET("/articles/:id", apipublic.GetArticleByID)
+	g.GET("/articles/id/:id", apipublic.GetArticleByID)
 	//作品列表
 	g.GET("/works", apipublic.GetWork)
+	//所有作品列表
+	g.GET("/works/all", apipublic.GetAllWork)
 	//作品详情
-	g.GET("/works/:id", apipublic.GetWorkByID)
-
+	g.GET("/works/id/:id", apipublic.GetWorkByID)
+	g.GET("/articles/categories", v1.GetArticleCategory)
+	g.GET("/works/tags", v1.GetWorkTag)
 }

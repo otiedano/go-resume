@@ -20,6 +20,19 @@ func TotalWork() (num int, err error) {
 	return
 }
 
+//TotalWorkByTag 计算作品总数
+func TotalWorkByTag(tagID int) (num int, err error) {
+	var sqlStr string
+	if tagID == 0 {
+		sqlStr = "SELECT COUNT(work_id) from work where status=1"
+		err = db.Get(&num, sqlStr)
+	} else {
+		sqlStr = "SELECT COUNT(SELECT work_id from work where status=1) from work_tag_rl where tag_id=?"
+		err = db.Get(&num, sqlStr, tagID)
+	}
+	return
+}
+
 //TotalWorkByAuthor 计算作品总数
 func TotalWorkByAuthor(userID int) (num int, err error) {
 
@@ -52,7 +65,7 @@ func TotalWorkByStatus(args ...interface{}) (num int, err error) {
 func GetWork(workID int) (w *model.WorkDetail, err error) {
 	w = &model.WorkDetail{}
 	sqlStr := `
-	SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+	SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 	       ,w.content,w.img,w.if_horizons
 	FROM work w
 	LEFT JOIN user u ON w.user_id=u.user_id
@@ -94,7 +107,7 @@ func GetWork(workID int) (w *model.WorkDetail, err error) {
 func GetPWork(userID, workID int) (w *model.WorkDetail, err error) {
 	w = &model.WorkDetail{}
 	sqlStr := `
-	SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+	SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 	       ,w.content,w.img,w.if_horizons
 	FROM work w
 	LEFT JOIN user u ON w.user_id=u.user_id
@@ -136,7 +149,7 @@ func GetPWork(userID, workID int) (w *model.WorkDetail, err error) {
 func GetRPWork(workID int) (w *model.WorkDetail, err error) {
 	w = &model.WorkDetail{}
 	sqlStr := `
-	SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+	SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 	       ,w.content,w.img,w.if_horizons
 	FROM work w
 	LEFT JOIN user u ON w.user_id=u.user_id
@@ -178,7 +191,7 @@ func GetRPWork(workID int) (w *model.WorkDetail, err error) {
 func GetWorksByAuthor(userID int, offset, limit int) (works []*model.Work, err error) {
 
 	sqlStr := `
-		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		WHERE w.user_id=? AND status!=2
@@ -220,7 +233,7 @@ func GetWorksByTag(tagID int, offset, limit int) (works []*model.Work, err error
 	if tagID == 0 {
 		fmt.Print("begin getworksbytag")
 		sqlStr := `
-		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		WHERE w.status=1 
@@ -255,7 +268,7 @@ func GetWorksByTag(tagID int, offset, limit int) (works []*model.Work, err error
 
 	} else {
 		sqlStr := `
-		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		WHERE w.status=1  AND w.work_id in (SELECT work_id from work_tag_rl where tag_id=?)
@@ -288,13 +301,51 @@ func GetWorksByTag(tagID int, offset, limit int) (works []*model.Work, err error
 	return works, nil
 }
 
+//GetWorksNoLimit 前端读取全部作品，没有分页
+func GetWorksNoLimit() (works []*model.Work, err error) {
+	fmt.Print("begin getworksbytag")
+	sqlStr := `
+	SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+	FROM work w
+	LEFT JOIN user u ON w.user_id=u.user_id
+	WHERE w.status=1 
+	ORDER BY work_no desc
+	`
+
+	r, err := db.Queryx(sqlStr)
+	if err != nil {
+		return nil, err
+	}
+	for r.Next() {
+		w := &model.Work{}
+		err = r.StructScan(w)
+		if err != nil {
+			zlog.Error("err:", err)
+			return nil, err
+		}
+		sqlStr1 := `
+		SELECT r.rl_id,r.tag_id,t.tag_name,r.work_id,r.create_time,r.update_time
+		FROM work_tag_rl r
+		LEFT JOIN work_tag t ON r.tag_id=t.tag_id
+		WHERE work_id=?
+		`
+		err = db.Select(&(w.Tags), sqlStr1, w.WorkID)
+		if err != nil {
+			zlog.Error("err:", err)
+			return nil, err
+		}
+		works = append(works, w)
+	}
+	return works, nil
+}
+
 //GetAllWorksByStatus 根据状态显示所有作品
 func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model.Work, err error) {
 
 	if len(args) == 0 {
 		fmt.Print("begin getworksbytag")
 		sqlStr := `
-		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		ORDER BY update_time desc
@@ -329,7 +380,7 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 	}
 	if n, ok := args[0].(int); ok && n >= 0 && n <= 2 {
 		sqlStr := `
-		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		WHERE w.status=?
@@ -362,7 +413,7 @@ func GetAllWorksByStatus(offset, limit int, args ...interface{}) (works []*model
 	}
 
 	sqlStr := `
-		SELECT w.work_id,w.title,w.cover_img,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
+		SELECT w.work_id,w.title,w.cover_img,w.if_carousel,w.start_time,w.end_time,w.user_id,w.work_no,w.status,w.create_time,w.update_time,u.user_name,u.avatar,w.view_count
 		FROM work w
 		LEFT JOIN user u ON w.user_id=u.user_id
 		ORDER BY update_time desc
@@ -418,10 +469,10 @@ func AddWork(userID int, work *model.WorkDetail) (workID int, err error) {
 
 	//work表新增
 	sqlStr := `
-	INSERT INTO work (title,work_no,img,cover_img,content,start_time,end_time,if_horizons,user_id) 
+	INSERT INTO work (title,work_no,img,cover_img,if_carousel,content,start_time,end_time,if_horizons,user_id) 
 	VALUES(?,?,?,?,?,?,?,?,?)
 	`
-	result, err := tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.Content, work.StartTime, work.EndTime, work.IfHorizons, userID)
+	result, err := tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.IfCarousel, work.Content, work.StartTime, work.EndTime, work.IfHorizons, userID)
 	if err != nil {
 		zlog.Error(err)
 		return
@@ -495,10 +546,10 @@ func EditWork(userID int, work *model.WorkDetail) (err error) {
 
 	//work表新增
 	sqlStr := `
-	UPDATE work SET title=?,work_no=?,img=?,cover_img=?,content=?,start_time=?,end_time=?,if_horizons=?,update_time=?,status=0
+	UPDATE work SET title=?,work_no=?,img=?,cover_img=?,if_carousel=?,content=?,start_time=?,end_time=?,if_horizons=?,update_time=?,status=0
 	WHERE work_id=? And user_id=?
 	`
-	_, err = tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.Content, work.StartTime, work.EndTime, work.IfHorizons, time.Now(), work.WorkID, userID)
+	_, err = tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.IfCarousel, work.Content, work.StartTime, work.EndTime, work.IfHorizons, time.Now(), work.WorkID, userID)
 	if err != nil {
 		zlog.Error(err)
 		return

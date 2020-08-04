@@ -21,6 +21,7 @@ type Work struct {
 	UserName   string     `json:"user_name" db:"user_name" redis:"user_name"`
 	Avatar     string     `json:"avatar" db:"avatar" redis:"avatar"`
 	ViewCount  int        `json:"view_count" db:"view_count" redis:"view_count"`
+	IfCarousel int        `json:"if_carousel" db:"if_carousel" redis:"if_carousel"`
 }
 
 //WorkDetail 工作详情

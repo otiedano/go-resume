@@ -95,6 +95,11 @@ func TotalArticle() (int, error) {
 	return db.TotalArticle()
 }
 
+//TotalArticleByCategory 获取审核通过的内容
+func TotalArticleByCategory(categoryID int) (int, error) {
+	return db.TotalArticleByCategory(categoryID)
+}
+
 //RATotalArticle 管理员计算
 func RATotalArticle(args ...interface{}) (int, error) {
 	return db.TotalArticleByStatus(args...)

@@ -35,7 +35,7 @@ func GetArticleCategories() (categories []*model.ArticleCategory, err error) {
 	SELECT category_id,category_name,category_no 
 	From article_category
 	WHERE category_id > 1
-	ORDER BY category_no desc,update_time desc
+	ORDER BY category_no asc,update_time desc
 	
 	`
 

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"math"
 	"net/http"
 	"strconv"
 	"sz_resume_202005/model"
@@ -50,6 +51,18 @@ func GetWork(c *gin.Context) {
 		g.Response(http.StatusInternalServerError, e.ERROR_COUNT_RECORD, nil)
 		return
 	}
+
+	if len(works) == 0 && total > 0 && page > 1 {
+
+		page = int(math.Ceil(float64(total) / float64(setting.PageSize)))
+		works, err = service.GetWorksByAuthor(user.UserID, page)
+		if err != nil {
+			zlog.Error(err)
+			g.Response(http.StatusInternalServerError, e.ERROR_GET_RECORDS, nil)
+			return
+		}
+	}
+
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{
 		"total":   total,
 		"current": page,
