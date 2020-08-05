@@ -175,11 +175,12 @@ func AddWork(c *gin.Context) {
 		}
 
 	}
+	zlog.Debugf("work:%+v", work)
 	intNum, err := service.AddWork(user.UserID, work)
 	if err != nil {
-		zlog.Errorf("service.AddArticle failed,err:%v", err)
+		zlog.Errorf("service.AddWork failed,err:%v", err)
 		g.Response(http.StatusInternalServerError, e.ERROR_ADD_RECORD, nil)
-
+		return
 	}
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{"work_id": intNum})
 }

@@ -470,7 +470,7 @@ func AddWork(userID int, work *model.WorkDetail) (workID int, err error) {
 	//work表新增
 	sqlStr := `
 	INSERT INTO work (title,work_no,img,cover_img,if_carousel,content,start_time,end_time,if_horizons,user_id) 
-	VALUES(?,?,?,?,?,?,?,?,?)
+	VALUES(?,?,?,?,?,?,?,?,?,?)
 	`
 	result, err := tx.Exec(sqlStr, work.Title, work.WorkNO, work.Img, work.CoverImg, work.IfCarousel, work.Content, work.StartTime, work.EndTime, work.IfHorizons, userID)
 	if err != nil {
