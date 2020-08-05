@@ -25,6 +25,16 @@ func GetUserInfoCpt(c *gin.Context) {
 		g.Response(http.StatusInternalServerError, e.ERROR_GET_RECORD, nil)
 		return
 	}
+
+	if strings.Index(u.Avatar, "http://") != 0 && strings.Index(u.Avatar, "https://") != 0 {
+		if strings.Index(u.Avatar, "/") == 0 {
+			u.Avatar = setting.AppSetting.PrefixURL + u.Avatar
+		} else {
+			u.Avatar = setting.AppSetting.PrefixURL + "/" + u.Avatar
+		}
+
+	}
+
 	exp, err := service.GetExperiences(1)
 	if err != nil {
 		zlog.Error(err)
@@ -33,6 +43,7 @@ func GetUserInfoCpt(c *gin.Context) {
 	}
 	user.UserInfo = *u
 	user.Experiences = exp
+
 	g.Response(http.StatusOK, e.SUCCESS, user)
 
 }
@@ -64,7 +75,16 @@ func GetTec(c *gin.Context) {
 		return
 	}
 	for _, v := range sws {
-		v.Img = setting.AppSetting.PrefixURL + v.Img
+
+		if strings.Index(v.Img, "http://") != 0 && strings.Index(v.Img, "https://") != 0 {
+			if strings.Index(v.Img, "/") == 0 {
+				v.Img = setting.AppSetting.PrefixURL + v.Img
+			} else {
+				v.Img = setting.AppSetting.PrefixURL + "/" + v.Img
+			}
+
+		}
+
 	}
 	g.Response(http.StatusOK, e.SUCCESS, gin.H{
 		"softwares": sws,
