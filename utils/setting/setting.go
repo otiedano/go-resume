@@ -58,25 +58,33 @@ type App struct {
 var (
 	mysqlAddr = "root:tiedano1@tcp(127.0.0.1:3306)/resume?charset=utf8mb4&loc=Asia%2FShanghai&parseTime=true"
 	redisAddr = "localhost:6379"
+
+	cfgApp = "conf/app_dev.ini"
 )
 
 //Init 初始化，init的情况test不通过
 func Init() {
 	var err error
 	EnvRoot = os.Getenv(EnvRootName) //配置文件和日志库多处引用，所以需要先执行。
-	Cfg, err = ini.Load("conf/app.ini")
+	// log.Printf("EnvRoot:%v", os.Getenv("HOME"))
+	// log.Printf("HOME:%v", EnvRoot)
+	// log.Printf("读取cfg内容失败，sz_golang:%v", err)
+	Cfg, err = ini.Load(cfgApp)
 	if err != nil {
+		log.Printf("读取cfg内容失败，sz_golang:%v", err)
 		//log.Printf("Fail to parse 'conf/app.ini': %v", err)
 		if EnvRoot != "" {
-			src := EnvRoot + "conf/app.ini"
+			src := EnvRoot + cfgApp
 			Cfg, err = ini.Load(src)
 			if err != nil {
-				log.Fatalf("Fail to parse 'conf/app.ini' with absolute path: %v", err)
+				log.Fatalf("Fail to parse '%v' with absolute path: %v", cfgApp, err)
 			}
 		} else {
-			log.Fatalf("Fail to parse 'conf/app.ini',can not read envpath.")
+			log.Fatalf("Fail to parse '%v',can not read envpath.", cfgApp)
 		}
 
+	} else {
+		log.Printf("读取cfg内容失败，sz_golang:%v", err)
 	}
 	loadDefault()
 

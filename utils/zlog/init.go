@@ -24,17 +24,19 @@ func Init() {
 		src = setting.EnvRoot + getLogFilePath() + getLogFileName()
 		fileOutput = zapcore.Lock(zapcore.AddSync(&lumberjack.Logger{
 			Filename:   src,
-			MaxSize:    50, // megabytes
+			MaxSize:    3, // megabytes
 			MaxBackups: 3,
 			MaxAge:     28, // days
 		}))
 	} else {
+		src = getLogFilePath() + getLogFileName()
 		fileOutput = zapcore.Lock(zapcore.AddSync(&lumberjack.Logger{
-			MaxSize:    50, // megabytes
+			Filename:   src,
+			MaxSize:    3, // megabytes
 			MaxBackups: 3,
 			MaxAge:     28, // days
 		}))
-		log.Errorf("envPath not exsit,can't find logPath\n")
+		log.Errorf("envPath not exsit,please check the log file path\n")
 
 	}
 
